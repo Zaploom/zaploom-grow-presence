@@ -4,24 +4,24 @@ import { ArrowRight } from "lucide-react";
 
 const Hero = () => {
   return (
-    <section id="home" className="pt-32 pb-20 md:pt-40 md:pb-28 bg-gradient-to-br from-gray-50 to-gray-100">
+    <section id="home" className="py-20 md:py-28 bg-gradient-to-br from-gray-50 to-gray-100">
       <div className="container-custom">
         <div className="max-w-4xl mx-auto text-center">
-          <div className="flex justify-center mb-6">
+          <div className="flex justify-center mb-8">
             <img 
               src="/lovable-uploads/28695496-ca46-4844-9858-2ec2cec6c76a.png"
               alt="Zaploom Logo"
               className="h-24 w-auto animate-fade-in"
             />
           </div>
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 animate-fade-in">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-8 animate-fade-in tracking-tight">
             Grow Your Presence with{" "}
             <span className="text-zaploom">Zaploom</span>
           </h1>
-          <p className="text-xl md:text-2xl text-gray-600 mb-8 animate-fade-in">
+          <p className="text-xl md:text-2xl text-gray-600 mb-10 animate-fade-in">
             Modern websites and web apps built to grow your brand, business, or idea — beautifully and efficiently.
           </p>
-          <div className="flex flex-col sm:flex-row justify-center gap-4 animate-fade-in">
+          <div className="flex flex-col sm:flex-row justify-center gap-6 animate-fade-in">
             <Button className="btn-primary text-lg group">
               Start Your Project
               <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />

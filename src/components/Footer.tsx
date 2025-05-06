@@ -15,7 +15,7 @@ const Footer = () => {
   return (
     <footer className="bg-gray-900 text-white pt-16 pb-8">
       <div className="container-custom">
-        <div className="grid md:grid-cols-3 lg:grid-cols-4 gap-8 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
           <div>
             <div className="flex items-center mb-6">
               <img
@@ -31,21 +31,21 @@ const Footer = () => {
             <div className="flex space-x-4">
               <a
                 href="#"
-                className="bg-gray-800 p-2 rounded-full hover:bg-zaploom transition-colors"
+                className="bg-gray-800 p-2 rounded-full hover:bg-zaploom transition-colors duration-200"
                 aria-label="Instagram"
               >
                 <Instagram className="h-5 w-5" />
               </a>
               <a
                 href="#"
-                className="bg-gray-800 p-2 rounded-full hover:bg-zaploom transition-colors"
+                className="bg-gray-800 p-2 rounded-full hover:bg-zaploom transition-colors duration-200"
                 aria-label="LinkedIn"
               >
                 <Linkedin className="h-5 w-5" />
               </a>
               <a
                 href="#"
-                className="bg-gray-800 p-2 rounded-full hover:bg-zaploom transition-colors"
+                className="bg-gray-800 p-2 rounded-full hover:bg-zaploom transition-colors duration-200"
                 aria-label="GitHub"
               >
                 <Github className="h-5 w-5" />
@@ -60,7 +60,7 @@ const Footer = () => {
                 <li key={link.name}>
                   <a
                     href={link.href}
-                    className="text-gray-400 hover:text-white transition-colors"
+                    className="text-gray-400 hover:text-white transition-colors duration-200"
                   >
                     {link.name}
                   </a>
@@ -73,17 +73,17 @@ const Footer = () => {
             <h3 className="text-lg font-bold mb-6">Services</h3>
             <ul className="space-y-3">
               <li>
-                <a href="#services" className="text-gray-400 hover:text-white transition-colors">
+                <a href="#services" className="text-gray-400 hover:text-white transition-colors duration-200">
                   Custom Website Design
                 </a>
               </li>
               <li>
-                <a href="#services" className="text-gray-400 hover:text-white transition-colors">
+                <a href="#services" className="text-gray-400 hover:text-white transition-colors duration-200">
                   Web App Development
                 </a>
               </li>
               <li>
-                <a href="#services" className="text-gray-400 hover:text-white transition-colors">
+                <a href="#services" className="text-gray-400 hover:text-white transition-colors duration-200">
                   UI/UX Design
                 </a>
               </li>
@@ -95,13 +95,13 @@ const Footer = () => {
             <ul className="space-y-3">
               <li className="text-gray-400">
                 <span className="block text-sm">Email:</span>
-                <a href="mailto:hello@zaploom.in" className="hover:text-white transition-colors">
+                <a href="mailto:hello@zaploom.in" className="hover:text-white transition-colors duration-200">
                   hello@zaploom.in
                 </a>
               </li>
               <li className="text-gray-400">
                 <span className="block text-sm">WhatsApp:</span>
-                <a href="tel:+91XXXXXXXXXX" className="hover:text-white transition-colors">
+                <a href="tel:+91XXXXXXXXXX" className="hover:text-white transition-colors duration-200">
                   +91-XXXXXXXXXX
                 </a>
               </li>
@@ -115,10 +115,10 @@ const Footer = () => {
               &copy; {currentYear} Zaploom. All rights reserved.
             </p>
             <div className="flex space-x-6 mt-4 md:mt-0">
-              <a href="#" className="text-gray-500 hover:text-white text-sm transition-colors">
+              <a href="#" className="text-gray-500 hover:text-white text-sm transition-colors duration-200">
                 Privacy Policy
               </a>
-              <a href="#" className="text-gray-500 hover:text-white text-sm transition-colors">
+              <a href="#" className="text-gray-500 hover:text-white text-sm transition-colors duration-200">
                 Terms of Service
               </a>
             </div>

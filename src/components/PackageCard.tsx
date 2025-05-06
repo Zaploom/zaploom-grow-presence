@@ -24,8 +24,12 @@ const PackageCard = ({
   featured = false,
 }: PackageCardProps) => {
   return (
-    <div className={`bg-white rounded-xl overflow-hidden shadow-md transition-all hover:shadow-xl ${featured ? 'featured-card' : ''} h-full flex flex-col`}>
-      {featured && <span className="featured-badge text-sm font-medium">Best Value</span>}
+    <div className={`bg-white rounded-xl overflow-hidden shadow-md transition-all hover:shadow-xl relative h-full flex flex-col ${featured ? 'ring-2 ring-zaploom' : ''}`}>
+      {featured && (
+        <span className="absolute -top-4 right-4 bg-zaploom text-white text-sm font-medium px-4 py-1 rounded-full shadow-md">
+          Best Value
+        </span>
+      )}
       <div className="p-6 md:p-8 flex flex-col h-full">
         <div className="mb-6">
           <h3 className="text-xl font-bold mb-2 text-gray-900">{title}</h3>

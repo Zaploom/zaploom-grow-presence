@@ -3,11 +3,11 @@ import { Button } from "@/components/ui/button";
 
 const About = () => {
   return (
-    <section id="about" className="section-padding bg-white">
+    <section id="about" className="py-16 md:py-20 bg-white">
       <div className="container-custom">
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <div className="order-2 md:order-1">
-            <h2 className="text-3xl md:text-4xl font-bold mb-6 text-gray-900">
+            <h2 className="text-3xl md:text-4xl font-bold mb-6 text-gray-900 tracking-tight">
               About <span className="text-zaploom">Zaploom</span>
             </h2>
             <p className="text-lg text-gray-600 mb-6">
@@ -20,7 +20,7 @@ const About = () => {
           </div>
           <div className="order-1 md:order-2">
             <div className="relative">
-              <div className="aspect-video bg-gray-200 rounded-lg overflow-hidden shadow-lg">
+              <div className="aspect-video bg-gray-200 rounded-xl overflow-hidden shadow-lg">
                 <img
                   src="https://images.unsplash.com/photo-1483058712412-4245e9b90334"
                   alt="Web development team"

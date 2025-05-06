@@ -47,10 +47,10 @@ const Portfolio = () => {
   ];
 
   return (
-    <section id="portfolio" className="section-padding bg-gray-50">
+    <section id="portfolio" className="py-16 md:py-20 bg-gray-50">
       <div className="container-custom">
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6 text-gray-900">
+          <h2 className="text-3xl md:text-4xl font-bold mb-6 text-gray-900 tracking-tight">
             Our <span className="text-zaploom">Portfolio</span>
           </h2>
           <p className="text-lg text-gray-600">
@@ -58,9 +58,9 @@ const Portfolio = () => {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {projects.map((project) => (
-            <Card key={project.id} className="overflow-hidden card-hover">
+            <Card key={project.id} className="overflow-hidden card-hover h-full flex flex-col">
               <div className="aspect-video relative overflow-hidden bg-gray-200">
                 <img
                   src={project.image}
@@ -73,17 +73,19 @@ const Portfolio = () => {
                   </div>
                 </div>
               </div>
-              <CardContent className="p-6">
+              <CardContent className="p-6 flex flex-col flex-grow">
                 <h3 className="text-xl font-bold mb-2 text-gray-900">{project.title}</h3>
                 <p className="text-gray-600 mb-4">{project.description}</p>
                 <p className="text-sm font-medium text-gray-500 mb-4">Stack: {project.stack}</p>
-                <Button 
-                  variant="outline" 
-                  className="border-zaploom text-zaploom hover:bg-zaploom/10"
-                  onClick={() => setActiveProject(project)}
-                >
-                  View Project
-                </Button>
+                <div className="mt-auto">
+                  <Button 
+                    variant="outline" 
+                    className="border-zaploom text-zaploom hover:bg-zaploom/10 transition-colors duration-200"
+                    onClick={() => setActiveProject(project)}
+                  >
+                    View Project
+                  </Button>
+                </div>
               </CardContent>
             </Card>
           ))}
@@ -98,7 +100,7 @@ const Portfolio = () => {
                   <h3 className="text-2xl font-bold text-gray-900">{activeProject.title}</h3>
                   <button 
                     onClick={() => setActiveProject(null)}
-                    className="text-gray-500 hover:text-gray-700"
+                    className="text-gray-500 hover:text-gray-700 transition-colors duration-200"
                   >
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -115,7 +117,11 @@ const Portfolio = () => {
                 <p className="text-sm font-medium text-gray-500 mb-6">Stack: {activeProject.stack}</p>
                 <div className="flex space-x-4">
                   <Button className="btn-primary">View Live Site</Button>
-                  <Button variant="outline" className="border-zaploom text-zaploom hover:bg-zaploom/10" onClick={() => setActiveProject(null)}>
+                  <Button 
+                    variant="outline" 
+                    className="border-zaploom text-zaploom hover:bg-zaploom/10 transition-colors duration-200" 
+                    onClick={() => setActiveProject(null)}
+                  >
                     Close
                   </Button>
                 </div>

@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -35,10 +36,10 @@ const ContactForm = () => {
   };
 
   return (
-    <section id="contact" className="section-padding bg-gray-50">
+    <section id="contact" className="py-16 md:py-20 bg-gray-50">
       <div className="container-custom">
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6 text-gray-900">
+          <h2 className="text-3xl md:text-4xl font-bold mb-6 text-gray-900 tracking-tight">
             Get In <span className="text-zaploom">Touch</span>
           </h2>
           <p className="text-lg text-gray-600">
@@ -99,7 +100,7 @@ const ContactForm = () => {
               
               <Button 
                 type="submit" 
-                className="btn-primary w-full" 
+                className="btn-primary w-full transition-opacity hover:opacity-90 duration-200" 
                 disabled={isSubmitting}
               >
                 {isSubmitting ? "Sending..." : "Send Message"}
@@ -107,62 +108,64 @@ const ContactForm = () => {
             </form>
           </div>
           
-          <div>
-            <h3 className="text-2xl font-bold mb-6 text-gray-900">Contact Information</h3>
-            
-            <div className="space-y-6">
-              <div className="flex items-start">
-                <div className="bg-zaploom/10 p-3 rounded-full mr-4">
-                  <Mail className="h-6 w-6 text-zaploom" />
-                </div>
-                <div>
-                  <h4 className="text-lg font-medium text-gray-900">Email</h4>
-                  <a href="mailto:hello@zaploom.in" className="text-gray-600 hover:text-zaploom">
-                    hello@zaploom.in
-                  </a>
-                </div>
-              </div>
+          <div className="flex flex-col justify-between">
+            <div>
+              <h3 className="text-2xl font-bold mb-6 text-gray-900">Contact Information</h3>
               
-              <div className="flex items-start">
-                <div className="bg-zaploom/10 p-3 rounded-full mr-4">
-                  <Phone className="h-6 w-6 text-zaploom" />
-                </div>
-                <div>
-                  <h4 className="text-lg font-medium text-gray-900">WhatsApp</h4>
-                  <a href="tel:+91XXXXXXXXXX" className="text-gray-600 hover:text-zaploom">
-                    +91-XXXXXXXXXX
-                  </a>
-                </div>
-              </div>
-              
-              <div className="flex items-start">
-                <div className="bg-zaploom/10 p-3 rounded-full mr-4">
-                  <MessageSquare className="h-6 w-6 text-zaploom" />
-                </div>
-                <div>
-                  <h4 className="text-lg font-medium text-gray-900">Social Media</h4>
-                  <div className="flex space-x-4 mt-2">
-                    <a 
-                      href="#" 
-                      className="text-gray-600 hover:text-zaploom transition-colors"
-                      aria-label="Instagram"
-                    >
-                      <Instagram className="h-5 w-5" />
+              <div className="space-y-6">
+                <div className="flex items-center">
+                  <div className="bg-zaploom/10 p-3 rounded-full mr-4">
+                    <Mail className="h-6 w-6 text-zaploom" />
+                  </div>
+                  <div>
+                    <h4 className="text-lg font-medium text-gray-900">Email</h4>
+                    <a href="mailto:hello@zaploom.in" className="text-gray-600 hover:text-zaploom transition-colors duration-200">
+                      hello@zaploom.in
                     </a>
-                    <a 
-                      href="#" 
-                      className="text-gray-600 hover:text-zaploom transition-colors"
-                      aria-label="LinkedIn"
-                    >
-                      <Linkedin className="h-5 w-5" />
+                  </div>
+                </div>
+                
+                <div className="flex items-center">
+                  <div className="bg-zaploom/10 p-3 rounded-full mr-4">
+                    <Phone className="h-6 w-6 text-zaploom" />
+                  </div>
+                  <div>
+                    <h4 className="text-lg font-medium text-gray-900">WhatsApp</h4>
+                    <a href="tel:+91XXXXXXXXXX" className="text-gray-600 hover:text-zaploom transition-colors duration-200">
+                      +91-XXXXXXXXXX
                     </a>
-                    <a 
-                      href="#" 
-                      className="text-gray-600 hover:text-zaploom transition-colors"
-                      aria-label="GitHub"
-                    >
-                      <Github className="h-5 w-5" />
-                    </a>
+                  </div>
+                </div>
+                
+                <div className="flex items-center">
+                  <div className="bg-zaploom/10 p-3 rounded-full mr-4">
+                    <MessageSquare className="h-6 w-6 text-zaploom" />
+                  </div>
+                  <div>
+                    <h4 className="text-lg font-medium text-gray-900">Social Media</h4>
+                    <div className="flex space-x-4 mt-2">
+                      <a 
+                        href="#" 
+                        className="text-gray-600 hover:text-zaploom transition-colors duration-200"
+                        aria-label="Instagram"
+                      >
+                        <Instagram className="h-5 w-5" />
+                      </a>
+                      <a 
+                        href="#" 
+                        className="text-gray-600 hover:text-zaploom transition-colors duration-200"
+                        aria-label="LinkedIn"
+                      >
+                        <Linkedin className="h-5 w-5" />
+                      </a>
+                      <a 
+                        href="#" 
+                        className="text-gray-600 hover:text-zaploom transition-colors duration-200"
+                        aria-label="GitHub"
+                      >
+                        <Github className="h-5 w-5" />
+                      </a>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -170,7 +173,7 @@ const ContactForm = () => {
             
             <div className="mt-8 bg-white p-6 rounded-lg shadow-md">
               <h4 className="text-lg font-medium text-gray-900 mb-4">When to Expect Our Response</h4>
-              <ul className="space-y-2">
+              <ul className="space-y-3">
                 <li className="flex items-start">
                   <Check className="h-5 w-5 text-zaploom mr-2 flex-shrink-0 mt-0.5" />
                   <span className="text-sm text-gray-600">
