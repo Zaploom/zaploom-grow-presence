@@ -1,9 +1,8 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Instagram, Linkedin, Github, Mail, Phone, MessageSquare } from "lucide-react";
+import { Instagram, Linkedin, Github, Mail, Phone, MessageSquare, Check } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 const ContactForm = () => {
