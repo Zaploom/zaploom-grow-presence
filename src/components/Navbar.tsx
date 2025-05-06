@@ -71,7 +71,6 @@ const Navbar = () => {
                     <a
                       key={link.name}
                       href={link.href}
-                      className="py-3 px-4 text-gray-800 hover:text-zaploom hover:bg-gray-50 rounded-md transition-all duration-300"
                       onClick={() => setMobileMenuOpen(false)}
                       style={{ animationDelay: `${index * 0.1}s` }}
                       className="py-3 px-4 text-gray-800 hover:text-zaploom hover:bg-gray-50 rounded-md transition-all duration-300 animate-fade-in-right"
