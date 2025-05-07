@@ -1,4 +1,5 @@
 
+import React, { useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import About from "@/components/About";
@@ -14,7 +15,6 @@ import Footer from "@/components/Footer";
 import Blog from "@/components/Blog";
 import FAQ from "@/components/FAQ";
 import LiveChat from "@/components/LiveChat";
-import { useEffect } from "react";
 
 const Index = () => {
   // Refresh AOS animations when components mount
