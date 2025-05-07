@@ -1,6 +1,7 @@
 
 import PackageCard from "./PackageCard";
 import { Button } from "@/components/ui/button";
+import { MessageSquare } from "lucide-react";
 
 const Packages = () => {
   const packages = [
@@ -83,33 +84,43 @@ const Packages = () => {
   ];
 
   return (
-    <section id="packages" className="py-20 lg:py-24 bg-white relative">
+    <section id="packages" className="py-20 lg:py-24 bg-white dark:bg-gray-900 theme-transition relative" data-aos="fade-up">
       {/* Background element */}
-      <div className="absolute left-0 bottom-0 h-64 w-64 bg-zaploom/5 rounded-full blur-3xl"></div>
+      <div className="absolute left-0 bottom-0 h-64 w-64 bg-zaploom/5 dark:bg-zaploom/10 rounded-full blur-3xl"></div>
       
       <div className="container-custom relative z-10">
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6 text-gray-900 tracking-tight">
-            Our <span className="text-zaploom relative inline-block">
+          <h2 className="text-3xl md:text-4xl font-bold mb-6 text-gray-900 dark:text-white tracking-tight">
+            Our <span className="text-zaploom dark:text-zaploom-light relative inline-block">
               Packages
-              <span className="absolute -bottom-1 left-0 w-full h-1 bg-zaploom/20 rounded-full"></span>
+              <span className="absolute -bottom-1 left-0 w-full h-1 bg-zaploom/20 dark:bg-zaploom-light/20 rounded-full"></span>
             </span>
           </h2>
-          <p className="text-lg text-gray-600">
+          <p className="text-lg text-gray-600 dark:text-gray-300">
             Choose the package that best fits your needs and budget. All our packages include responsive design, SEO optimization, and post-launch support.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 md:gap-8">
           {packages.map((pkg, index) => (
-            <div key={index} className="h-full transform transition-transform duration-300 hover:-translate-y-1">
+            <div 
+              key={index} 
+              className="h-full transform transition-transform duration-300 hover:-translate-y-1"
+              data-aos="fade-up"
+              data-aos-delay={index * 100}
+            >
               <PackageCard {...pkg} />
             </div>
           ))}
         </div>
         
         <div className="mt-16 text-center">
-          <Button className="btn-primary transition-transform duration-300 hover:scale-105">
+          <Button 
+            className="btn-primary transition-transform duration-300 hover:scale-105 flex items-center gap-2"
+            data-aos="fade-up"
+            data-aos-delay="200"
+          >
+            <MessageSquare className="w-5 h-5" />
             Discuss Your Project
           </Button>
         </div>

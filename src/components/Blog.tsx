@@ -1,7 +1,7 @@
 
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Book } from "lucide-react";
 
 // Sample blog posts for demonstration
 const blogPosts = [
@@ -80,26 +80,28 @@ const Blog = () => {
           <p className="text-lg text-gray-600 dark:text-gray-300">
             Insights, tutorials, and updates from our team to help you build better digital experiences.
           </p>
-          
-          <div className="flex flex-wrap justify-center gap-2 mt-8">
-            {categories.map(category => (
-              <button
-                key={category.id}
-                onClick={() => setActiveCategory(category.id)}
-                className={`px-4 py-2 rounded-full transition-all duration-300 ${
-                  activeCategory === category.id
-                    ? "bg-zaploom dark:bg-zaploom text-white"
-                    : "bg-white dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300"
-                }`}
-                aria-label={`Filter by ${category.name}`}
-              >
-                {category.name}
-              </button>
-            ))}
-          </div>
+        </div>
+        
+        <div className="flex flex-wrap justify-center gap-2 mt-8 mb-12">
+          {categories.map(category => (
+            <button
+              key={category.id}
+              onClick={() => setActiveCategory(category.id)}
+              className={`px-4 py-2 rounded-full transition-all duration-300 ${
+                activeCategory === category.id
+                  ? "bg-zaploom dark:bg-zaploom text-white"
+                  : "bg-white dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300"
+              }`}
+              aria-label={`Filter by ${category.name}`}
+              data-aos="fade-up"
+              data-aos-delay="100"
+            >
+              {category.name}
+            </button>
+          ))}
         </div>
 
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-2">
+        <div className="grid gap-8 md:grid-cols-2">
           {filteredPosts.map((post, index) => (
             <article 
               key={post.id} 
@@ -145,9 +147,13 @@ const Blog = () => {
         </div>
         
         <div className="mt-12 text-center">
-          <Button className="btn-primary group">
+          <Button 
+            className="btn-primary group flex items-center gap-2"
+            data-aos="fade-up"
+          >
+            <Book className="h-5 w-5" />
             View All Articles
-            <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+            <ArrowRight className="ml-1 h-5 w-5 group-hover:translate-x-1 transition-transform" />
           </Button>
         </div>
       </div>
