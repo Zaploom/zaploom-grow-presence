@@ -28,7 +28,7 @@ const Navbar = () => {
 
   // Toggle dark/light mode
   const toggleDarkMode = () => {
-    if (darkMode) {
+    if (document.documentElement.classList.contains("dark")) {
       document.documentElement.classList.remove("dark");
       localStorage.setItem("theme", "light");
       setDarkMode(false);

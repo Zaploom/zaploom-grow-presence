@@ -87,23 +87,6 @@
   h1, h2, h3, h4, h5, h6 {
     @apply font-heading font-semibold;
   }
-  
-  /* Typewriter effect */
-  .typewriter-text {
-    border-right: 0.15em solid;
-    animation: typing 3s steps(40, end), blink-caret 0.75s step-end infinite;
-    animation-iteration-count: infinite;
-  }
-  
-  @keyframes typing {
-    from { width: 0; }
-    to { width: 100%; }
-  }
-  
-  @keyframes blink-caret {
-    from, to { border-color: transparent }
-    50% { border-color: #8b2548; }
-  }
 }
 
 /* Custom utility classes */
