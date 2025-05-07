@@ -24,7 +24,10 @@ const PackageCard = ({
   featured = false,
 }: PackageCardProps) => {
   return (
-    <div className={`bg-white rounded-xl overflow-hidden shadow-md transition-all hover:shadow-xl relative h-full flex flex-col ${featured ? 'ring-2 ring-zaploom' : ''}`}>
+    <div className={`bg-white rounded-xl overflow-hidden shadow-md transition-all duration-300 hover:shadow-xl relative h-full flex flex-col ${featured ? 'ring-2 ring-zaploom shadow-lg' : 'border border-gray-100'}`}>
+      {featured && (
+        <div className="absolute top-0 right-0 w-full h-1 bg-zaploom"></div>
+      )}
       {featured && (
         <span className="absolute -top-4 right-4 bg-zaploom text-white text-sm font-medium px-4 py-1 rounded-full shadow-md">
           Best Value
@@ -65,7 +68,7 @@ const PackageCard = ({
                 {(featured ? addons : upgrades || addons)?.map((item, index) => (
                   <li key={index} className="flex justify-between items-center text-sm">
                     <span className="text-gray-600">{item.name}</span>
-                    <span className="text-gray-900 font-medium">{item.price}</span>
+                    <span className={`font-medium ${featured ? "text-zaploom" : "text-gray-900"}`}>{item.price}</span>
                   </li>
                 ))}
               </ul>

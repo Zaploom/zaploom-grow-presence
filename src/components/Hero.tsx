@@ -4,8 +4,14 @@ import { ArrowRight } from "lucide-react";
 
 const Hero = () => {
   return (
-    <section id="home" className="py-20 md:py-28 bg-gradient-to-br from-gray-50 to-gray-100">
-      <div className="container-custom">
+    <section id="home" className="relative py-28 md:py-36 bg-gradient-to-br from-gray-50 to-gray-100 overflow-hidden">
+      {/* Abstract background shapes */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute top-24 left-[10%] w-64 h-64 lg:w-96 lg:h-96 bg-zaploom/5 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-32 right-[5%] w-72 h-72 lg:w-[28rem] lg:h-[28rem] bg-zaploom/5 rounded-full blur-3xl"></div>
+      </div>
+      
+      <div className="container-custom relative z-10">
         <div className="max-w-4xl mx-auto text-center">
           <div className="flex justify-center mb-8">
             <img 
@@ -14,24 +20,40 @@ const Hero = () => {
               className="h-24 w-auto animate-fade-in"
             />
           </div>
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-8 animate-fade-in tracking-tight">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-8 animate-fade-in tracking-tight leading-tight">
             Grow Your Presence with{" "}
-            <span className="text-zaploom">Zaploom</span>
+            <span className="text-zaploom relative inline-block">
+              Zaploom
+              <span className="absolute -bottom-2 left-0 w-full h-2 bg-zaploom/20 rounded-full"></span>
+            </span>
           </h1>
-          <p className="text-xl md:text-2xl text-gray-600 mb-10 animate-fade-in">
-            Modern websites and web apps built to grow your brand, business, or idea — beautifully and efficiently.
-          </p>
+          
+          <div className="flex relative mb-10 justify-center">
+            <p className="text-xl md:text-2xl text-gray-600 animate-fade-in max-w-3xl">
+              Modern websites and web apps built to grow your brand, business, or idea — 
+              <span className="typewriter-text relative inline-flex overflow-hidden border-r-2 border-zaploom">
+                <span className="whitespace-nowrap"> beautifully and efficiently.</span>
+              </span>
+            </p>
+          </div>
+          
           <div className="flex flex-col sm:flex-row justify-center gap-6 animate-fade-in">
-            <Button className="btn-primary text-lg group">
+            <Button className="btn-primary text-lg group transition-all duration-300 hover:scale-105">
               Start Your Project
               <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
             </Button>
-            <Button variant="outline" className="text-lg border-zaploom text-zaploom hover:bg-zaploom/10">
+            <Button variant="outline" className="text-lg border-zaploom text-zaploom hover:bg-zaploom/10 transition-all duration-300">
               View Our Work
             </Button>
           </div>
+          
+          <div className="mt-12 flex items-center justify-center gap-2">
+            <span className="block h-2 w-2 rounded-full bg-zaploom animate-pulse"></span>
+            <span className="text-sm text-gray-500">Scroll to explore</span>
+          </div>
         </div>
       </div>
+      
       <div className="absolute bottom-0 left-0 w-full overflow-hidden">
         <svg
           xmlns="http://www.w3.org/2000/svg"

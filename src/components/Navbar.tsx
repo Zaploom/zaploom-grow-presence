@@ -7,6 +7,7 @@ import { Menu, X } from "lucide-react";
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("home");
   const isMobile = useIsMobile();
 
   useEffect(() => {
@@ -18,8 +19,36 @@ const Navbar = () => {
       }
     };
 
+    // Track active section based on scroll position
+    const observeElements = () => {
+      const sections = document.querySelectorAll('section[id]');
+      const scrollY = window.scrollY;
+      
+      sections.forEach(section => {
+        const sectionHeight = section.offsetHeight;
+        const sectionTop = section.offsetTop - 100;
+        const sectionId = section.getAttribute('id');
+        
+        if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
+          setActiveSection(sectionId || "home");
+        }
+      });
+    };
+
     window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", observeElements);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("scroll", observeElements);
+    };
+  }, []);
+
+  // Enable smooth scrolling
+  useEffect(() => {
+    document.documentElement.style.scrollBehavior = 'smooth';
+    return () => {
+      document.documentElement.style.scrollBehavior = 'auto';
+    };
   }, []);
 
   const navLinks = [
@@ -34,7 +63,7 @@ const Navbar = () => {
   return (
     <nav
       className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${
-        isScrolled ? "bg-white shadow-md py-4" : "bg-transparent py-6"
+        isScrolled ? "bg-white/95 backdrop-blur-sm shadow-md py-4" : "bg-transparent py-6"
       }`}
     >
       <div className="container-custom flex items-center justify-between">
@@ -65,7 +94,7 @@ const Navbar = () => {
             </button>
 
             {mobileMenuOpen && (
-              <div className="absolute top-full left-0 w-full bg-white shadow-md py-4 animate-fade-in">
+              <div className="absolute top-full left-0 w-full bg-white/95 backdrop-blur-sm shadow-lg py-4 animate-fade-in">
                 <div className="container-custom flex flex-col space-y-4">
                   {navLinks.map((link, index) => (
                     <a
@@ -73,12 +102,16 @@ const Navbar = () => {
                       href={link.href}
                       onClick={() => setMobileMenuOpen(false)}
                       style={{ animationDelay: `${index * 0.1}s` }}
-                      className="py-3 px-4 text-gray-800 hover:text-zaploom hover:bg-gray-50 rounded-md transition-all duration-300 animate-fade-in-right"
+                      className={`py-3 px-6 rounded-md transition-all duration-300 animate-fade-in-right ${
+                        activeSection === link.href.substring(1)
+                          ? "bg-zaploom/10 text-zaploom font-medium"
+                          : "text-gray-800 hover:text-zaploom hover:bg-gray-50"
+                      }`}
                     >
                       {link.name}
                     </a>
                   ))}
-                  <Button className="btn-primary mt-3 w-full transition-all duration-300 hover:translate-y-[-2px]">
+                  <Button className="btn-primary mt-3 w-full transition-all duration-300 hover:scale-105 hover:shadow-lg">
                     Start Your Project
                   </Button>
                 </div>
@@ -92,13 +125,17 @@ const Navbar = () => {
                 <a
                   key={link.name}
                   href={link.href}
-                  className="text-gray-700 hover:text-zaploom font-medium transition-all duration-300 hover:translate-y-[-2px] relative after:absolute after:bottom-[-4px] after:left-0 after:h-[2px] after:w-0 after:bg-zaploom after:transition-all after:duration-300 hover:after:w-full"
+                  className={`text-gray-700 font-medium transition-all duration-300 hover:translate-y-[-2px] relative ${
+                    activeSection === link.href.substring(1)
+                      ? "text-zaploom after:w-full"
+                      : "hover:text-zaploom after:w-0"
+                  } after:absolute after:bottom-[-4px] after:left-0 after:h-[2px] after:bg-zaploom after:transition-all after:duration-300 hover:after:w-full`}
                 >
                   {link.name}
                 </a>
               ))}
             </div>
-            <Button className="btn-primary transition-transform duration-300 hover:translate-y-[-2px] hover:shadow-lg">Start Your Project</Button>
+            <Button className="btn-primary transition-transform duration-300 hover:scale-105 hover:shadow-lg">Start Your Project</Button>
           </div>
         )}
       </div>

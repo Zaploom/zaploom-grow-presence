@@ -10,58 +10,100 @@ interface Project {
   description: string;
   image: string;
   stack: string;
+  category: string;
 }
 
 const Portfolio = () => {
   const [activeProject, setActiveProject] = useState<Project | null>(null);
+  const [activeFilter, setActiveFilter] = useState("all");
+
+  const categories = [
+    { id: "all", name: "All Projects" },
+    { id: "websites", name: "Websites" },
+    { id: "apps", name: "Web Apps" },
+    { id: "ui", name: "UI/UX Design" }
+  ];
 
   const projects: Project[] = [
     {
       id: "glowclinic",
       title: "GlowClinic – Medical Website",
-      description: "Built for a local skin clinic with appointment form & reviews",
+      description: "Built for a local skin clinic with appointment form & reviews. Features custom illustrations, testimonial carousel, and mobile-first design.",
       stack: "React, Tailwind, Netlify",
-      image: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d"
+      image: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d",
+      category: "websites"
     },
     {
       id: "fittrack",
       title: "FitTrack – Fitness Tracker MVP",
-      description: "Custom dashboard with login, progress tracking, and data visualization",
+      description: "Custom dashboard with login, progress tracking, and data visualization. Includes user profiles, workout logs, and nutrition tracking.",
       stack: "MERN, JWT, Chart.js",
-      image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085"
+      image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085",
+      category: "apps"
     },
     {
       id: "craftybay",
       title: "CraftyBay – Portfolio Site",
-      description: "A minimal one-page portfolio for a handmade crafts creator",
+      description: "A minimal one-page portfolio for a handmade crafts creator. Features product showcase, custom animations, and Instagram feed integration.",
       stack: "React, Tailwind",
-      image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158"
+      image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158",
+      category: "websites"
     },
     {
       id: "coachease",
       title: "CoachEase – Booking Website",
-      description: "Business website for a life coach with integrated Calendly & blog",
+      description: "Business website for a life coach with integrated Calendly & blog. Includes testimonials, service packages, and a resources section.",
       stack: "React, Tailwind, Calendly API",
-      image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f"
+      image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f",
+      category: "websites"
     }
   ];
 
+  const filteredProjects = activeFilter === "all" 
+    ? projects 
+    : projects.filter(project => project.category === activeFilter);
+
   return (
-    <section id="portfolio" className="py-16 md:py-20 bg-gray-50">
-      <div className="container-custom">
+    <section id="portfolio" className="py-20 lg:py-24 bg-gray-50 relative">
+      {/* Background element */}
+      <div className="absolute right-0 bottom-0 h-64 w-64 bg-zaploom/5 rounded-full blur-3xl"></div>
+      
+      <div className="container-custom relative z-10">
         <div className="text-center max-w-3xl mx-auto mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-900 tracking-tight">
-            Our <span className="text-zaploom">Portfolio</span>
+          <h2 className="text-3xl md:text-4xl font-bold mb-6 text-gray-900 tracking-tight">
+            Our <span className="text-zaploom relative inline-block">
+              Portfolio
+              <span className="absolute -bottom-1 left-0 w-full h-1 bg-zaploom/20 rounded-full"></span>
+            </span>
           </h2>
-          <p className="text-lg text-gray-600 mb-2">
+          <p className="text-lg text-gray-600 mb-8">
             Check out some of our recent projects. Each project is crafted with attention to detail,
             focusing on both aesthetics and functionality.
           </p>
+          
+          <div className="flex flex-wrap justify-center gap-2 mb-10">
+            {categories.map(category => (
+              <button
+                key={category.id}
+                className={`px-4 py-2 rounded-full transition-colors ${
+                  activeFilter === category.id 
+                    ? "bg-zaploom text-white" 
+                    : "bg-white hover:bg-gray-100 text-gray-700"
+                }`}
+                onClick={() => setActiveFilter(category.id)}
+              >
+                {category.name}
+              </button>
+            ))}
+          </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
-          {projects.map((project) => (
-            <Card key={project.id} className="overflow-hidden card-hover h-full flex flex-col border border-gray-200 shadow-sm hover:shadow-lg transition-all duration-300">
+          {filteredProjects.map((project) => (
+            <Card 
+              key={project.id} 
+              className="overflow-hidden card-hover h-full flex flex-col border border-gray-200 shadow-sm hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1"
+            >
               <div className="aspect-video relative overflow-hidden bg-gray-100">
                 <img
                   src={project.image}
@@ -76,7 +118,7 @@ const Portfolio = () => {
               </div>
               <CardContent className="p-6 flex flex-col flex-grow">
                 <h3 className="text-xl font-bold mb-3 text-gray-900">{project.title}</h3>
-                <p className="text-gray-600 mb-4">{project.description}</p>
+                <p className="text-gray-600 mb-4">{project.description.substring(0, 100)}...</p>
                 <div className="bg-gray-50 px-3 py-2 rounded-md inline-block mb-5 w-fit">
                   <p className="text-sm font-medium text-gray-600">Stack: {project.stack}</p>
                 </div>
@@ -128,7 +170,7 @@ const Portfolio = () => {
                 </div>
                 <p className="text-gray-600 mb-8 leading-relaxed">{activeProject.description}</p>
                 <div className="flex flex-wrap gap-4">
-                  <Button className="bg-zaploom hover:bg-zaploom/90 text-white flex items-center gap-2">
+                  <Button className="bg-zaploom hover:bg-zaploom/90 text-white flex items-center gap-2 transition-transform duration-300 hover:scale-105">
                     View Live Site
                     <ExternalLink className="h-4 w-4" />
                   </Button>
