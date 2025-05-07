@@ -11,10 +11,21 @@ import Testimonials from "@/components/Testimonials";
 import LeadMagnet from "@/components/LeadMagnet";
 import ContactForm from "@/components/ContactForm";
 import Footer from "@/components/Footer";
+import Blog from "@/components/Blog";
+import FAQ from "@/components/FAQ";
+import LiveChat from "@/components/LiveChat";
+import { useEffect } from "react";
 
 const Index = () => {
+  // Refresh AOS animations when components mount
+  useEffect(() => {
+    if (typeof window.AOS !== 'undefined') {
+      window.AOS.refresh();
+    }
+  }, []);
+
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-white dark:bg-gray-950 transition-colors duration-500">
       <Navbar />
       <Hero />
       <ClientLogos />
@@ -23,10 +34,13 @@ const Index = () => {
       <Features />
       <Packages />
       <Portfolio />
+      <Blog />
+      <FAQ />
       <LeadMagnet />
       <Testimonials />
       <ContactForm />
       <Footer />
+      <LiveChat />
     </div>
   );
 };

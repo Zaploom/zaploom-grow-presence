@@ -49,7 +49,7 @@
     --popover-foreground: 210 40% 98%;
 
     --primary: 343 57% 34%;
-    --primary-foreground: 222.2 47.4% 11.2%;
+    --primary-foreground: 210 40% 98%;
 
     --secondary: 217.2 32.6% 17.5%;
     --secondary-foreground: 210 40% 98%;
@@ -74,9 +74,14 @@
     @apply border-border;
   }
 
+  html {
+    @apply scroll-smooth;
+  }
+
   body {
     @apply bg-background text-foreground font-sans;
     scroll-behavior: smooth;
+    transition: background-color 0.3s ease, color 0.3s ease;
   }
   
   h1, h2, h3, h4, h5, h6 {
@@ -112,7 +117,7 @@
   }
   
   .btn-primary {
-    @apply bg-zaploom hover:bg-zaploom-light text-white px-6 py-3 rounded-lg font-medium transition-all shadow-md hover:shadow-lg;
+    @apply bg-zaploom dark:bg-zaploom hover:bg-zaploom-light dark:hover:bg-zaploom-light text-white px-6 py-3 rounded-lg font-medium transition-all shadow-md hover:shadow-lg;
   }
   
   .card-hover {
@@ -129,5 +134,30 @@
   
   .link-hover {
     @apply relative after:absolute after:bottom-[-2px] after:left-0 after:h-[2px] after:w-0 after:bg-zaploom after:transition-all after:duration-300 hover:after:w-full;
+  }
+
+  /* Card hover effects */
+  .card-hover-effect {
+    @apply transition-all duration-300 hover:shadow-xl hover:scale-[1.03] hover:bg-white/80 dark:hover:bg-gray-900/80 backdrop-blur-sm;
+  }
+
+  /* Service cards */
+  .service-card {
+    @apply bg-white dark:bg-gray-800 p-8 rounded-lg shadow-md card-hover-effect;
+  }
+
+  /* Blog cards */
+  .blog-card {
+    @apply bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-md card-hover-effect;
+  }
+
+  /* FAQ accordion */
+  .faq-item {
+    @apply border-b border-gray-200 dark:border-gray-700;
+  }
+
+  /* Dark mode transition */
+  .theme-transition {
+    @apply transition-colors duration-500;
   }
 }

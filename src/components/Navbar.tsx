@@ -2,13 +2,42 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { useIsMobile } from "@/hooks/use-mobile";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Sun, Moon } from "lucide-react";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
+  const [darkMode, setDarkMode] = useState(false);
   const isMobile = useIsMobile();
+
+  // Initialize dark mode from localStorage or system preference
+  useEffect(() => {
+    // Check for saved theme preference or respect OS preference
+    const savedTheme = localStorage.getItem("theme");
+    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    
+    if (savedTheme === "dark" || (!savedTheme && prefersDark)) {
+      document.documentElement.classList.add("dark");
+      setDarkMode(true);
+    } else {
+      document.documentElement.classList.remove("dark");
+      setDarkMode(false);
+    }
+  }, []);
+
+  // Toggle dark/light mode
+  const toggleDarkMode = () => {
+    if (darkMode) {
+      document.documentElement.classList.remove("dark");
+      localStorage.setItem("theme", "light");
+      setDarkMode(false);
+    } else {
+      document.documentElement.classList.add("dark");
+      localStorage.setItem("theme", "dark");
+      setDarkMode(true);
+    }
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -57,13 +86,16 @@ const Navbar = () => {
     { name: "Services", href: "#services" },
     { name: "Packages", href: "#packages" },
     { name: "Portfolio", href: "#portfolio" },
+    { name: "Blog", href: "#blog" },
     { name: "Contact", href: "#contact" },
   ];
 
   return (
     <nav
       className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${
-        isScrolled ? "bg-white/95 backdrop-blur-sm shadow-md py-4" : "bg-transparent py-6"
+        isScrolled 
+          ? "bg-white/95 dark:bg-gray-900/95 backdrop-blur-sm shadow-md py-4" 
+          : "bg-transparent dark:bg-transparent py-6"
       }`}
     >
       <div className="container-custom flex items-center justify-between">
@@ -76,25 +108,36 @@ const Navbar = () => {
             alt="Zaploom Logo"
             className="h-12 w-auto mr-3 transition-transform duration-500"
           />
-          <span className="text-2xl font-heading font-bold text-gray-900 group-hover:text-zaploom transition-colors duration-300">Zaploom</span>
+          <span className="text-2xl font-heading font-bold text-gray-900 dark:text-white group-hover:text-zaploom dark:group-hover:text-zaploom-light transition-colors duration-300">Zaploom</span>
         </a>
 
         {isMobile ? (
           <>
-            <button
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 text-gray-600 focus:outline-none transition-colors duration-300 hover:text-zaploom"
-              aria-label="Toggle mobile menu"
-            >
-              {mobileMenuOpen ? (
-                <X className="h-6 w-6 transition-all duration-300" />
-              ) : (
-                <Menu className="h-6 w-6 transition-all duration-300" />
-              )}
-            </button>
+            <div className="flex items-center gap-2">
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={toggleDarkMode}
+                className="mr-2 text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full"
+                aria-label={darkMode ? "Switch to light mode" : "Switch to dark mode"}
+              >
+                {darkMode ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
+              </Button>
+              <button
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                className="p-2 text-gray-600 dark:text-gray-300 focus:outline-none transition-colors duration-300 hover:text-zaploom dark:hover:text-zaploom-light"
+                aria-label="Toggle mobile menu"
+              >
+                {mobileMenuOpen ? (
+                  <X className="h-6 w-6 transition-all duration-300" />
+                ) : (
+                  <Menu className="h-6 w-6 transition-all duration-300" />
+                )}
+              </button>
+            </div>
 
             {mobileMenuOpen && (
-              <div className="absolute top-full left-0 w-full bg-white/95 backdrop-blur-sm shadow-lg py-4 animate-fade-in">
+              <div className="absolute top-full left-0 w-full bg-white/95 dark:bg-gray-900/95 backdrop-blur-sm shadow-lg py-4 animate-fade-in">
                 <div className="container-custom flex flex-col space-y-4">
                   {navLinks.map((link, index) => (
                     <a
@@ -104,8 +147,8 @@ const Navbar = () => {
                       style={{ animationDelay: `${index * 0.1}s` }}
                       className={`py-3 px-6 rounded-md transition-all duration-300 animate-fade-in-right ${
                         activeSection === link.href.substring(1)
-                          ? "bg-zaploom/10 text-zaploom font-medium"
-                          : "text-gray-800 hover:text-zaploom hover:bg-gray-50"
+                          ? "bg-zaploom/10 dark:bg-zaploom/20 text-zaploom dark:text-zaploom-light font-medium"
+                          : "text-gray-800 dark:text-gray-200 hover:text-zaploom dark:hover:text-zaploom-light hover:bg-gray-50 dark:hover:bg-gray-800"
                       }`}
                     >
                       {link.name}
@@ -125,17 +168,30 @@ const Navbar = () => {
                 <a
                   key={link.name}
                   href={link.href}
-                  className={`text-gray-700 font-medium transition-all duration-300 hover:translate-y-[-2px] relative ${
+                  className={`text-gray-700 dark:text-gray-200 font-medium transition-all duration-300 hover:translate-y-[-2px] relative ${
                     activeSection === link.href.substring(1)
-                      ? "text-zaploom after:w-full"
-                      : "hover:text-zaploom after:w-0"
-                  } after:absolute after:bottom-[-4px] after:left-0 after:h-[2px] after:bg-zaploom after:transition-all after:duration-300 hover:after:w-full`}
+                      ? "text-zaploom dark:text-zaploom-light after:w-full"
+                      : "hover:text-zaploom dark:hover:text-zaploom-light after:w-0"
+                  } after:absolute after:bottom-[-4px] after:left-0 after:h-[2px] after:bg-zaploom dark:after:bg-zaploom-light after:transition-all after:duration-300 hover:after:w-full`}
                 >
                   {link.name}
                 </a>
               ))}
             </div>
-            <Button className="btn-primary transition-transform duration-300 hover:scale-105 hover:shadow-lg">Start Your Project</Button>
+            <div className="flex items-center gap-4">
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={toggleDarkMode}
+                className="text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full transition-all duration-300"
+                aria-label={darkMode ? "Switch to light mode" : "Switch to dark mode"}
+              >
+                {darkMode ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
+              </Button>
+              <Button className="btn-primary transition-transform duration-300 hover:scale-105 hover:shadow-lg">
+                Start Your Project
+              </Button>
+            </div>
           </div>
         )}
       </div>
