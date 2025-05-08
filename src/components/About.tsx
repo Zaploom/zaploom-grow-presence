@@ -42,7 +42,7 @@ const About = () => {
               </div>
               <div className="absolute -bottom-6 -left-6 w-32 h-32 bg-zaploom rounded-lg shadow-lg flex items-center justify-center text-white p-4 z-20">
                 <div className="text-center">
-                  <p className="text-2xl font-bold">5+</p>
+                  <p className="text-2xl font-bold">2+</p>
                   <p className="text-sm">Years Experience</p>
                 </div>
               </div>
