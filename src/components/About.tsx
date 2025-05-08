@@ -1,6 +1,7 @@
 
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const About = () => {
   return (
@@ -21,10 +22,12 @@ const About = () => {
               <p className="text-lg text-gray-600 mb-8">
                 Our approach combines modern design principles with cutting-edge web technologies to create websites and applications that not only look stunning but also perform exceptionally well.
               </p>
-              <Button className="btn-primary group transition-all duration-300 hover:scale-105">
-                Learn More About Us
-                <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-              </Button>
+              <Link to="/about-us">
+                <Button className="btn-primary group transition-all duration-300 hover:scale-105">
+                  Learn More About Us
+                  <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                </Button>
+              </Link>
             </div>
           </div>
           <div className="order-1 md:order-2">
