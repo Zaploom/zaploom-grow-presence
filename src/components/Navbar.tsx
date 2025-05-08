@@ -1,7 +1,9 @@
+
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { Menu, X, Sun, Moon } from "lucide-react";
+import { Link, useLocation } from "react-router-dom";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -9,6 +11,8 @@ const Navbar = () => {
   const [activeSection, setActiveSection] = useState("home");
   const [darkMode, setDarkMode] = useState(false);
   const isMobile = useIsMobile();
+  const location = useLocation();
+  const isHomePage = location.pathname === "/";
 
   // Initialize dark mode from localStorage or system preference
   useEffect(() => {
@@ -47,8 +51,10 @@ const Navbar = () => {
       }
     };
 
-    // Track active section based on scroll position
+    // Track active section based on scroll position (only on home page)
     const observeElements = () => {
+      if (!isHomePage) return;
+      
       const sections = document.querySelectorAll('section[id]');
       const scrollY = window.scrollY;
       
@@ -69,7 +75,7 @@ const Navbar = () => {
       window.removeEventListener("scroll", handleScroll);
       window.removeEventListener("scroll", observeElements);
     };
-  }, []);
+  }, [isHomePage]);
 
   // Enable smooth scrolling
   useEffect(() => {
@@ -80,13 +86,23 @@ const Navbar = () => {
   }, []);
 
   const navLinks = [
-    { name: "Home", href: "#home" },
-    { name: "About", href: "#about" },
-    { name: "Services", href: "#services" },
-    { name: "Packages", href: "#packages" },
-    { name: "Portfolio", href: "#portfolio" },
-    { name: "Contact", href: "#contact" },
+    { name: "Home", href: isHomePage ? "#home" : "/" },
+    { name: "About", href: isHomePage ? "#about" : "/#about" },
+    { name: "Services", href: isHomePage ? "#services" : "/#services" },
+    { name: "Packages", href: isHomePage ? "#packages" : "/#packages" },
+    { name: "Portfolio", href: isHomePage ? "#portfolio" : "/#portfolio" },
+    { name: "Contact", href: isHomePage ? "#contact" : "/#contact" },
   ];
+
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    if (!isHomePage && !href.startsWith("/")) {
+      e.preventDefault();
+      window.location.href = href;
+    }
+    if (mobileMenuOpen) {
+      setMobileMenuOpen(false);
+    }
+  };
 
   return (
     <nav
@@ -97,8 +113,8 @@ const Navbar = () => {
       }`}
     >
       <div className="container-custom flex items-center justify-between">
-        <a 
-          href="#home" 
+        <Link 
+          to="/"
           className="flex items-center group transition-transform duration-300 hover:scale-105"
         >
           <img
@@ -107,7 +123,7 @@ const Navbar = () => {
             className="h-12 w-auto mr-3 transition-transform duration-500"
           />
           <span className="text-2xl font-heading font-bold text-gray-900 dark:text-white group-hover:text-zaploom dark:group-hover:text-zaploom-light transition-colors duration-300">Zaploom</span>
-        </a>
+        </Link>
 
         {isMobile ? (
           <>
@@ -141,10 +157,10 @@ const Navbar = () => {
                     <a
                       key={link.name}
                       href={link.href}
-                      onClick={() => setMobileMenuOpen(false)}
+                      onClick={(e) => handleNavClick(e, link.href)}
                       style={{ animationDelay: `${index * 0.1}s` }}
                       className={`py-3 px-6 rounded-md transition-all duration-300 animate-fade-in-right ${
-                        activeSection === link.href.substring(1)
+                        isHomePage && activeSection === link.href.substring(1)
                           ? "bg-zaploom/10 dark:bg-zaploom/20 text-zaploom dark:text-zaploom-light font-medium"
                           : "text-gray-800 dark:text-gray-200 hover:text-zaploom dark:hover:text-zaploom-light hover:bg-gray-50 dark:hover:bg-gray-800"
                       }`}
@@ -163,8 +179,9 @@ const Navbar = () => {
                 <a
                   key={link.name}
                   href={link.href}
+                  onClick={(e) => handleNavClick(e, link.href)}
                   className={`text-gray-700 dark:text-gray-200 font-medium transition-all duration-300 hover:translate-y-[-2px] relative ${
-                    activeSection === link.href.substring(1)
+                    isHomePage && activeSection === link.href.substring(1)
                       ? "text-zaploom dark:text-zaploom-light after:w-full"
                       : "hover:text-zaploom dark:hover:text-zaploom-light after:w-0"
                   } after:absolute after:bottom-[-4px] after:left-0 after:h-[2px] after:bg-zaploom dark:after:bg-zaploom-light after:transition-all after:duration-300 hover:after:w-full`}
