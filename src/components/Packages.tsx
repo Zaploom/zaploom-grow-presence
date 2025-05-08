@@ -5,20 +5,20 @@ const Packages = () => {
   const packages = [
     {
       title: "Starter Package – Personal Web Presence",
-      price: "₹3,000 – ₹5,000",
+      price: "₹5,000 – ₹7,000",
       duration: "3–5 days",
       ideal: "Ideal for freelancers, students, creators",
       includes: [
         "Clean 1-page responsive website (React + Tailwind)",
         "Hero, About, Services, Contact sections",
         "WhatsApp/social/email buttons",
-        "Hosted on Vercel/Netlify",
+        // "Hosted on Vercel/Netlify",
         "Basic animations"
       ],
       addons: [
         { name: "Domain setup", price: "+₹500" },
         { name: "Contact form", price: "+₹800" },
-        { name: "Portfolio/project section", price: "+₹1,000" },
+        { name: "Portfolio/project  section", price: "+₹1,000" },
         { name: "Logo design help (Canva)", price: "+₹1,000" }
       ]
     },

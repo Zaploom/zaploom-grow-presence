@@ -37,9 +37,9 @@ const Features = () => {
   ];
 
   const stats = [
-    { value: 25, label: "Happy Clients", suffix: "+" },
+    { value: 10, label: "Happy Clients", suffix: "+" },
     { value: 90, label: "PageSpeed Score", suffix: "+" },
-    { value: 5, label: "Years Experience", suffix: "+" },
+    { value: 2, label: "Years Experience", suffix: "+" },
     { value: 100, label: "Project Completion", suffix: "%" }
   ];
 
