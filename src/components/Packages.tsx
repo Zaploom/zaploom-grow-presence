@@ -18,7 +18,7 @@ const Packages = () => {
       addons: [
         { name: "Domain setup", price: "+₹500" },
         { name: "Contact form", price: "+₹800" },
-        { name: "Portfolio/project  section", price: "+₹1,000" },
+        { name: "Portfolio/project section", price: "+₹1,000" },
         { name: "Logo design help (Canva)", price: "+₹1,000" }
       ]
     },
