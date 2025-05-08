@@ -96,12 +96,12 @@ const Packages = () => {
               <span className="absolute -bottom-1 left-0 w-full h-1 bg-zaploom/20 dark:bg-zaploom-light/20 rounded-full"></span>
             </span>
           </h2>
-          <p className="text-lg text-gray-600 dark:text-gray-300">
+          <p className="text-lg text-gray-600 dark:text-gray-300 px-4">
             Choose the package that best fits your needs and budget. All our packages include responsive design, SEO optimization, and post-launch support.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 md:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 md:gap-8 px-4">
           {packages.map((pkg, index) => (
             <div 
               key={index} 

@@ -30,15 +30,15 @@ const PackageCard = ({
       }`}
     >
       {featured && (
-        <div className="absolute top-0 right-0 w-full h-1 bg-zaploom"></div>
+        <div className="absolute top-0 left-0 right-0 h-1 bg-zaploom"></div>
       )}
       {featured && (
-        <span className="absolute -top-4 right-4 bg-zaploom text-white text-sm font-medium px-4 py-1 rounded-full shadow-md">
+        <span className="absolute -top-3 right-4 bg-zaploom text-white text-sm font-medium px-4 py-1 rounded-full shadow-lg z-10">
           Best Value
         </span>
       )}
       <div className="p-6 md:p-8 flex flex-col h-full">
-        <div className="mb-6">
+        <div className="mb-6 pt-3">
           <h3 className="text-xl font-bold mb-2 text-gray-900 dark:text-white">{title}</h3>
           <p className="text-lg font-semibold text-zaploom dark:text-zaploom-light">{price}</p>
           <p className="text-sm text-gray-500 dark:text-gray-400">Delivery: {duration}</p>

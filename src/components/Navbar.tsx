@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { useIsMobile } from "@/hooks/use-mobile";
@@ -86,7 +85,6 @@ const Navbar = () => {
     { name: "Services", href: "#services" },
     { name: "Packages", href: "#packages" },
     { name: "Portfolio", href: "#portfolio" },
-    { name: "Blog", href: "#blog" },
     { name: "Contact", href: "#contact" },
   ];
 
