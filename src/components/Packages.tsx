@@ -1,7 +1,5 @@
 
 import PackageCard from "./PackageCard";
-import { Button } from "@/components/ui/button";
-import { MessageSquare } from "lucide-react";
 
 const Packages = () => {
   const packages = [
@@ -112,17 +110,6 @@ const Packages = () => {
               <PackageCard {...pkg} />
             </div>
           ))}
-        </div>
-        
-        <div className="mt-16 text-center">
-          <Button 
-            className="btn-primary transition-transform duration-300 hover:scale-105 flex items-center gap-2"
-            data-aos="fade-up"
-            data-aos-delay="200"
-          >
-            <MessageSquare className="w-5 h-5" />
-            Discuss Your Project
-          </Button>
         </div>
       </div>
     </section>

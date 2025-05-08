@@ -152,16 +152,13 @@ const Navbar = () => {
                       {link.name}
                     </a>
                   ))}
-                  <Button className="btn-primary mt-3 w-full transition-all duration-300 hover:scale-105 hover:shadow-lg">
-                    Start Your Project
-                  </Button>
                 </div>
               </div>
             )}
           </>
         ) : (
-          <div className="flex items-center space-x-8">
-            <div className="hidden md:flex space-x-8 items-center">
+          <div className="flex items-center">
+            <div className="flex space-x-8 items-center">
               {navLinks.map((link) => (
                 <a
                   key={link.name}
@@ -175,19 +172,14 @@ const Navbar = () => {
                   {link.name}
                 </a>
               ))}
-            </div>
-            <div className="flex items-center gap-4">
               <Button
                 variant="ghost"
                 size="icon"
                 onClick={toggleDarkMode}
-                className="text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full transition-all duration-300"
+                className="text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full transition-all duration-300 ml-2"
                 aria-label={darkMode ? "Switch to light mode" : "Switch to dark mode"}
               >
                 {darkMode ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
-              </Button>
-              <Button className="btn-primary transition-transform duration-300 hover:scale-105 hover:shadow-lg">
-                Start Your Project
               </Button>
             </div>
           </div>

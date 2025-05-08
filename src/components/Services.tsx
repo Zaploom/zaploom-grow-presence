@@ -1,6 +1,5 @@
 
 import { Globe, Wrench, Brush } from "lucide-react";
-import { Button } from "@/components/ui/button";
 
 const Services = () => {
   const serviceItems = [
@@ -27,15 +26,22 @@ const Services = () => {
       <div className="absolute right-0 top-0 h-64 w-64 bg-zaploom/5 rounded-full blur-3xl"></div>
       
       <div className="container-custom relative z-10">
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        <div className="text-center max-w-3xl mx-auto mb-12">
           <h2 className="text-3xl md:text-4xl font-bold mb-6 text-gray-900 tracking-tight">
             Our <span className="text-zaploom relative inline-block">
               Services
               <span className="absolute -bottom-1 left-0 w-full h-1 bg-zaploom/20 rounded-full"></span>
             </span>
           </h2>
-          <p className="text-lg text-gray-600">
-            We offer a comprehensive range of web development and design services to help you establish a powerful online presence.
+          <p className="text-lg text-gray-600 mb-6">
+            We transform your digital vision into reality with our comprehensive web solutions. 
+            Our team of experienced developers and designers work hand-in-hand to deliver exceptional 
+            digital experiences that not only look stunning but also drive real business results.
+          </p>
+          <p className="text-gray-600">
+            Whether you need a simple landing page or a complex web application, we have the expertise 
+            to bring your ideas to life with cutting-edge technologies, responsive design, and 
+            user-centered approach that ensures your online presence stands out.
           </p>
         </div>
 
@@ -51,23 +57,9 @@ const Services = () => {
                 </div>
               </div>
               <h3 className="text-xl font-semibold mb-4 text-gray-900">{service.title}</h3>
-              <p className="text-gray-600 mb-6">{service.description}</p>
-              <div className="mt-auto w-full pt-4 text-center">
-                <a href="#contact" className="text-zaploom font-medium hover:underline inline-flex items-center transition-all duration-300">
-                  Learn more
-                  <svg className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                  </svg>
-                </a>
-              </div>
+              <p className="text-gray-600">{service.description}</p>
             </div>
           ))}
-        </div>
-        
-        <div className="mt-16 text-center">
-          <Button className="btn-primary transition-transform duration-300 hover:scale-105">
-            Get a Quote
-          </Button>
         </div>
       </div>
     </section>

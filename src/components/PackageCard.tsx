@@ -33,7 +33,7 @@ const PackageCard = ({
         <div className="absolute top-0 left-0 right-0 h-1 bg-zaploom"></div>
       )}
       {featured && (
-        <span className="absolute -top-3 right-4 bg-zaploom text-white text-sm font-medium px-4 py-1 rounded-full shadow-lg z-10">
+        <span className="absolute -top-3 right-4 bg-zaploom text-white text-sm font-medium px-4 py-1 rounded-full shadow-lg z-10 transform translate-y-0">
           Best Value
         </span>
       )}

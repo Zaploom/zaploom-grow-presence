@@ -1,8 +1,15 @@
 
 import { Button } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, MessageSquare } from "lucide-react";
 
 const Hero = () => {
+  // Function to handle WhatsApp redirect
+  const handleWhatsAppRedirect = () => {
+    const message = encodeURIComponent("Hi, I'm interested in starting a project with Zaploom. Can we discuss?");
+    const whatsappURL = `https://wa.me/+917795522277?text=${message}`;
+    window.open(whatsappURL, '_blank');
+  };
+
   return (
     <section id="home" className="relative py-28 md:py-36 bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-950 overflow-hidden">
       {/* Abstract background shapes */}
@@ -36,11 +43,19 @@ const Hero = () => {
           </div>
           
           <div className="flex flex-col sm:flex-row justify-center gap-6 animate-fade-in">
-            <Button className="btn-primary text-lg group transition-all duration-300 hover:scale-105">
-              Start Your Project
-              <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+            <Button 
+              className="btn-primary text-lg group transition-all duration-300 hover:scale-105 flex items-center gap-2"
+              onClick={handleWhatsAppRedirect}
+            >
+              <MessageSquare className="h-5 w-5" />
+              Discuss Your Project
+              <ArrowRight className="ml-1 h-5 w-5 group-hover:translate-x-1 transition-transform" />
             </Button>
-            <Button variant="outline" className="text-lg border-zaploom dark:border-zaploom-light text-zaploom dark:text-zaploom-light hover:bg-zaploom/10 dark:hover:bg-zaploom-light/10 transition-all duration-300">
+            <Button 
+              variant="outline" 
+              className="text-lg border-zaploom dark:border-zaploom-light text-zaploom dark:text-zaploom-light hover:bg-zaploom/10 dark:hover:bg-zaploom-light/10 transition-all duration-300"
+              onClick={() => document.getElementById('portfolio')?.scrollIntoView()}
+            >
               View Our Work
             </Button>
           </div>
