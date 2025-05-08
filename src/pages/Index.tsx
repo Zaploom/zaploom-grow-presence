@@ -12,7 +12,6 @@ import Testimonials from "@/components/Testimonials";
 import LeadMagnet from "@/components/LeadMagnet";
 import ContactForm from "@/components/ContactForm";
 import Footer from "@/components/Footer";
-import Blog from "@/components/Blog";
 import FAQ from "@/components/FAQ";
 import LiveChat from "@/components/LiveChat";
 
@@ -34,7 +33,6 @@ const Index = () => {
       <Features />
       <Packages />
       <Portfolio />
-      <Blog />
       <FAQ />
       <LeadMagnet />
       <Testimonials />
