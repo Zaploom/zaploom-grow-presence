@@ -3,7 +3,8 @@ import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { Menu, X, Sun, Moon } from "lucide-react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { HashLink } from "react-router-hash-link";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -12,6 +13,7 @@ const Navbar = () => {
   const [darkMode, setDarkMode] = useState(false);
   const isMobile = useIsMobile();
   const location = useLocation();
+  const navigate = useNavigate();
   const isHomePage = location.pathname === "/";
 
   // Initialize dark mode from localStorage or system preference
@@ -86,19 +88,34 @@ const Navbar = () => {
   }, []);
 
   const navLinks = [
-    { name: "Home", href: isHomePage ? "#home" : "/" },
-    { name: "About", href: isHomePage ? "#about" : "/#about" },
-    { name: "Services", href: isHomePage ? "#services" : "/#services" },
-    { name: "Packages", href: isHomePage ? "#packages" : "/#packages" },
-    { name: "Portfolio", href: isHomePage ? "#portfolio" : "/#portfolio" },
-    { name: "Contact", href: isHomePage ? "#contact" : "/#contact" },
+    { name: "Home", href: "/#home" },
+    { name: "About", href: "/#about" },
+    { name: "Services", href: "/#services" },
+    { name: "Packages", href: "/#packages" },
+    { name: "Portfolio", href: "/#portfolio" },
+    { name: "Contact", href: "/#contact" },
   ];
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    if (!isHomePage && !href.startsWith("/")) {
-      e.preventDefault();
-      window.location.href = href;
+    e.preventDefault();
+    
+    if (href.startsWith("/#")) {
+      // If we're already on the home page, just scroll to the section
+      if (isHomePage) {
+        const targetId = href.substring(2);
+        const targetElement = document.getElementById(targetId);
+        if (targetElement) {
+          targetElement.scrollIntoView({ behavior: 'smooth' });
+        }
+      } else {
+        // Navigate to home page with hash
+        navigate(href);
+      }
+    } else {
+      // For non-hash links, use normal navigation
+      navigate(href);
     }
+    
     if (mobileMenuOpen) {
       setMobileMenuOpen(false);
     }
@@ -160,7 +177,7 @@ const Navbar = () => {
                       onClick={(e) => handleNavClick(e, link.href)}
                       style={{ animationDelay: `${index * 0.1}s` }}
                       className={`py-3 px-6 rounded-md transition-all duration-300 animate-fade-in-right ${
-                        isHomePage && activeSection === link.href.substring(1)
+                        isHomePage && activeSection === link.href.substring(2)
                           ? "bg-zaploom/10 dark:bg-zaploom/20 text-zaploom dark:text-zaploom-light font-medium"
                           : "text-gray-800 dark:text-gray-200 hover:text-zaploom dark:hover:text-zaploom-light hover:bg-gray-50 dark:hover:bg-gray-800"
                       }`}
@@ -181,7 +198,7 @@ const Navbar = () => {
                   href={link.href}
                   onClick={(e) => handleNavClick(e, link.href)}
                   className={`text-gray-700 dark:text-gray-200 font-medium transition-all duration-300 hover:translate-y-[-2px] relative ${
-                    isHomePage && activeSection === link.href.substring(1)
+                    isHomePage && activeSection === link.href.substring(2)
                       ? "text-zaploom dark:text-zaploom-light after:w-full"
                       : "hover:text-zaploom dark:hover:text-zaploom-light after:w-0"
                   } after:absolute after:bottom-[-4px] after:left-0 after:h-[2px] after:bg-zaploom dark:after:bg-zaploom-light after:transition-all after:duration-300 hover:after:w-full`}
