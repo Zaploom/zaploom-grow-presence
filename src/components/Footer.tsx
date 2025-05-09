@@ -124,12 +124,12 @@ const Footer = () => {
               &copy; {currentYear} Zaploom. All rights reserved.
             </p>
             <div className="flex space-x-6 mt-4 md:mt-0">
-              <a href="#" className="text-gray-500 hover:text-white text-sm transition-colors duration-200">
+              <Link to="/privacy-policy" className="text-gray-500 hover:text-white text-sm transition-colors duration-200">
                 Privacy Policy
-              </a>
-              <a href="#" className="text-gray-500 hover:text-white text-sm transition-colors duration-200">
+              </Link>
+              <Link to="/terms-of-service" className="text-gray-500 hover:text-white text-sm transition-colors duration-200">
                 Terms of Service
-              </a>
+              </Link>
             </div>
           </div>
         </div>
