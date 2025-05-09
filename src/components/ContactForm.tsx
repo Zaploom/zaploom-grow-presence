@@ -28,10 +28,10 @@ const ContactForm = () => {
     
     // Use EmailJS to send the form
     emailjs.sendForm(
-      'YOUR_SERVICE_ID', // Replace with your EmailJS service ID
-      'YOUR_TEMPLATE_ID', // Replace with your EmailJS template ID
+      'service_zvf56ue', // Replace with your EmailJS service ID
+      'template_b332wqh', // Replace with your EmailJS template ID
       formRef.current!,
-      'YOUR_PUBLIC_KEY' // Replace with your EmailJS public key
+      '6MMlAsUH5QO7-2-hr' // Replace with your EmailJS public key
     )
       .then((result) => {
         console.log('Email sent successfully:', result.text);
