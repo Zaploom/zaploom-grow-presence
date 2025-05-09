@@ -110,7 +110,7 @@ const AboutUs = () => {
         </div>
       </section>
       
-      {/* Team Section */}
+      {/* Team Section
       <section className="py-16 md:py-24 bg-white dark:bg-gray-950">
         <div className="container-custom">
           <div className="text-center max-w-3xl mx-auto mb-16">
@@ -164,7 +164,7 @@ const AboutUs = () => {
       </section>
       
       {/* Timeline */}
-      <section className="py-16 md:py-24 bg-gray-50 dark:bg-gray-900">
+      {/* <section className="py-16 md:py-24 bg-gray-50 dark:bg-gray-900">
         <div className="container-custom">
           <div className="text-center max-w-3xl mx-auto mb-16">
             <h2 className="text-3xl font-bold mb-6 text-gray-900 dark:text-white">Our Journey</h2>
@@ -213,14 +213,14 @@ const AboutUs = () => {
                   </div>
                   <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md flex-1 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
                     <h3 className="text-xl font-bold mb-2 text-gray-900 dark:text-white">{item.title}</h3>
-                    <p className="text-gray-600 dark:text-gray-300">{item.description}</p>
+                     <p className="text-gray-600 dark:text-gray-300">{item.description}</p>
                   </div>
                 </div>
               </div>
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
             
       {/* Mission Section */}
       <section className="py-16 md:py-24 bg-white dark:bg-gray-950">
