@@ -119,8 +119,8 @@ const ContactForm = () => {
                   </div>
                   <div>
                     <h4 className="text-lg font-medium text-gray-900">Email</h4>
-                    <a href="mailto:hello@zaploom.in" className="text-gray-600 hover:text-zaploom transition-colors duration-200">
-                      hello@zaploom.in
+                    <a href="mailto:zaploom.agency@gmail.com" className="text-gray-600 hover:text-zaploom transition-colors duration-200">
+                      zaploom.agency@gmail.com
                     </a>
                   </div>
                 </div>
@@ -131,8 +131,8 @@ const ContactForm = () => {
                   </div>
                   <div>
                     <h4 className="text-lg font-medium text-gray-900">WhatsApp</h4>
-                    <a href="tel:+91XXXXXXXXXX" className="text-gray-600 hover:text-zaploom transition-colors duration-200">
-                      +91-XXXXXXXXXX
+                    <a href="tel:+919199893756" className="text-gray-600 hover:text-zaploom transition-colors duration-200">
+                      +91-9199893756
                     </a>
                   </div>
                 </div>
