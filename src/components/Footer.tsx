@@ -1,5 +1,6 @@
 
 import { Instagram, Linkedin, Github } from "lucide-react";
+import { HashLink } from "react-router-hash-link";
 import { Link } from "react-router-dom";
 
 const Footer = () => {
@@ -59,12 +60,13 @@ const Footer = () => {
             <ul className="space-y-3">
               {navLinks.map((link) => (
                 <li key={link.name}>
-                  <Link
+                  <HashLink
                     to={link.href}
+                    smooth
                     className="text-gray-400 hover:text-white transition-colors duration-200"
                   >
                     {link.name}
-                  </Link>
+                  </HashLink>
                 </li>
               ))}
               <li>
@@ -82,19 +84,19 @@ const Footer = () => {
             <h3 className="text-lg font-bold mb-6">Services</h3>
             <ul className="space-y-3">
               <li>
-                <a href="/#services" className="text-gray-400 hover:text-white transition-colors duration-200">
+                <HashLink smooth to="/#services" className="text-gray-400 hover:text-white transition-colors duration-200">
                   Custom Website Design
-                </a>
+                </HashLink>
               </li>
               <li>
-                <a href="/#services" className="text-gray-400 hover:text-white transition-colors duration-200">
+                <HashLink smooth to="/#services" className="text-gray-400 hover:text-white transition-colors duration-200">
                   Web App Development
-                </a>
+                </HashLink>
               </li>
               <li>
-                <a href="/#services" className="text-gray-400 hover:text-white transition-colors duration-200">
+                <HashLink smooth to="/#services" className="text-gray-400 hover:text-white transition-colors duration-200">
                   UI/UX Design
-                </a>
+                </HashLink>
               </li>
             </ul>
           </div>
