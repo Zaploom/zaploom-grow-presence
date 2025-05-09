@@ -64,19 +64,19 @@ const Portfolio = () => {
     : projects.filter(project => project.category === activeFilter);
 
   return (
-    <section id="portfolio" className="py-20 lg:py-24 bg-gray-50 relative">
+    <section id="portfolio" className="py-20 lg:py-24 bg-gray-50 dark:bg-gray-900 relative">
       {/* Background element */}
-      <div className="absolute right-0 bottom-0 h-64 w-64 bg-zaploom/5 rounded-full blur-3xl"></div>
+      <div className="absolute right-0 bottom-0 h-64 w-64 bg-zaploom/5 dark:bg-zaploom/10 rounded-full blur-3xl"></div>
       
       <div className="container-custom relative z-10">
         <div className="text-center max-w-3xl mx-auto mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6 text-gray-900 tracking-tight">
-            Our <span className="text-zaploom relative inline-block">
+          <h2 className="text-3xl md:text-4xl font-bold mb-6 text-gray-900 dark:text-white tracking-tight">
+            Our <span className="text-zaploom dark:text-zaploom-light relative inline-block">
               Portfolio
-              <span className="absolute -bottom-1 left-0 w-full h-1 bg-zaploom/20 rounded-full"></span>
+              <span className="absolute -bottom-1 left-0 w-full h-1 bg-zaploom/20 dark:bg-zaploom-light/20 rounded-full"></span>
             </span>
           </h2>
-          <p className="text-lg text-gray-600 mb-8">
+          <p className="text-lg text-gray-600 dark:text-gray-300 mb-8">
             Check out some of our recent projects. Each project is crafted with attention to detail,
             focusing on both aesthetics and functionality.
           </p>
@@ -88,7 +88,7 @@ const Portfolio = () => {
                 className={`px-4 py-2 rounded-full transition-colors ${
                   activeFilter === category.id 
                     ? "bg-zaploom text-white" 
-                    : "bg-white hover:bg-gray-100 text-gray-700"
+                    : "bg-white dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-200"
                 }`}
                 onClick={() => setActiveFilter(category.id)}
               >
@@ -102,9 +102,9 @@ const Portfolio = () => {
           {filteredProjects.map((project) => (
             <Card 
               key={project.id} 
-              className="overflow-hidden card-hover h-full flex flex-col border border-gray-200 shadow-sm hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1"
+              className="overflow-hidden card-hover h-full flex flex-col border border-gray-200 dark:border-gray-700 shadow-sm hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 bg-white dark:bg-gray-800"
             >
-              <div className="aspect-video relative overflow-hidden bg-gray-100">
+              <div className="aspect-video relative overflow-hidden bg-gray-100 dark:bg-gray-700">
                 <img
                   src={project.image}
                   alt={project.title}
@@ -116,16 +116,16 @@ const Portfolio = () => {
                   </div>
                 </div>
               </div>
-              <CardContent className="p-6 flex flex-col flex-grow">
-                <h3 className="text-xl font-bold mb-3 text-gray-900">{project.title}</h3>
-                <p className="text-gray-600 mb-4">{project.description.substring(0, 100)}...</p>
-                <div className="bg-gray-50 px-3 py-2 rounded-md inline-block mb-5 w-fit">
-                  <p className="text-sm font-medium text-gray-600">Stack: {project.stack}</p>
+              <CardContent className="p-6 flex flex-col flex-grow dark:text-white">
+                <h3 className="text-xl font-bold mb-3 text-gray-900 dark:text-white">{project.title}</h3>
+                <p className="text-gray-600 dark:text-gray-300 mb-4">{project.description.substring(0, 100)}...</p>
+                <div className="bg-gray-50 dark:bg-gray-700/50 px-3 py-2 rounded-md inline-block mb-5 w-fit">
+                  <p className="text-sm font-medium text-gray-600 dark:text-gray-300">Stack: {project.stack}</p>
                 </div>
                 <div className="mt-auto flex">
                   <Button 
                     variant="outline" 
-                    className="border-zaploom text-zaploom hover:bg-zaploom/10 transition-colors duration-200"
+                    className="border-zaploom text-zaploom dark:border-zaploom-light dark:text-zaploom-light hover:bg-zaploom/10 dark:hover:bg-zaploom/20 transition-colors duration-200"
                     onClick={() => setActiveProject(project)}
                   >
                     View Project
@@ -138,23 +138,23 @@ const Portfolio = () => {
 
         {activeProject && (
           <div className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-            <div className="bg-white rounded-xl max-w-3xl w-full max-h-[90vh] overflow-y-auto relative animate-fade-in">
+            <div className="bg-white dark:bg-gray-800 rounded-xl max-w-3xl w-full max-h-[90vh] overflow-y-auto relative animate-fade-in">
               <Button 
                 variant="ghost" 
                 size="icon" 
-                className="absolute top-4 right-4 z-10 hover:bg-gray-100 rounded-full"
+                className="absolute top-4 right-4 z-10 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full"
                 onClick={() => setActiveProject(null)}
               >
-                <X className="h-5 w-5 text-gray-600" />
+                <X className="h-5 w-5 text-gray-600 dark:text-gray-300" />
               </Button>
               <div className="p-8">
                 <div className="mb-6">
-                  <h3 className="text-2xl font-bold text-gray-900 mb-2">{activeProject.title}</h3>
-                  <div className="bg-gray-50 px-3 py-2 rounded-md inline-block mb-4">
-                    <p className="text-sm font-medium text-gray-600">Stack: {activeProject.stack}</p>
+                  <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">{activeProject.title}</h3>
+                  <div className="bg-gray-50 dark:bg-gray-700 px-3 py-2 rounded-md inline-block mb-4">
+                    <p className="text-sm font-medium text-gray-600 dark:text-gray-300">Stack: {activeProject.stack}</p>
                   </div>
                 </div>
-                <div className="aspect-video bg-gray-100 rounded-lg overflow-hidden mb-6 shadow-inner">
+                <div className="aspect-video bg-gray-100 dark:bg-gray-700 rounded-lg overflow-hidden mb-6 shadow-inner">
                   {activeProject.image ? (
                     <img 
                       src={activeProject.image} 
@@ -163,12 +163,12 @@ const Portfolio = () => {
                     />
                   ) : (
                     <div className="w-full h-full flex items-center justify-center">
-                      <Image className="h-16 w-16 text-gray-400" />
+                      <Image className="h-16 w-16 text-gray-400 dark:text-gray-500" />
                       <span className="sr-only">Project Image</span>
                     </div>
                   )}
                 </div>
-                <p className="text-gray-600 mb-8 leading-relaxed">{activeProject.description}</p>
+                <p className="text-gray-600 dark:text-gray-300 mb-8 leading-relaxed">{activeProject.description}</p>
                 <div className="flex flex-wrap gap-4">
                   <Button className="bg-zaploom hover:bg-zaploom/90 text-white flex items-center gap-2 transition-transform duration-300 hover:scale-105">
                     View Live Site
@@ -176,7 +176,7 @@ const Portfolio = () => {
                   </Button>
                   <Button 
                     variant="outline" 
-                    className="border-zaploom text-zaploom hover:bg-zaploom/10 transition-colors duration-200" 
+                    className="border-zaploom text-zaploom dark:border-zaploom-light dark:text-zaploom-light hover:bg-zaploom/10 dark:hover:bg-zaploom/20 transition-colors duration-200" 
                     onClick={() => setActiveProject(null)}
                   >
                     Close
