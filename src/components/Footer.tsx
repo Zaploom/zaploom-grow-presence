@@ -21,7 +21,7 @@ const Footer = () => {
           <div>
             <Link to="/" className="flex items-center mb-6">
               <img
-                src="/lovable-uploads/28695496-ca46-4844-9858-2ec2cec6c76a.png"
+                src="/lovable-uploads/69c11995-2fc1-4bdb-a9e1-b01229d45d2e.png"
                 alt="Zaploom Logo"
                 className="h-10 w-auto mr-3 brightness-0 invert"
               />

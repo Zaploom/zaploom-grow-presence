@@ -79,7 +79,7 @@ const Navbar = () => {
     };
   }, [isHomePage]);
 
-  // Funtion for smoot navigation 
+  // Function for smooth navigation 
   const scrollToSection = (sectionId) => {
     const section = document.getElementById(sectionId);
     if(section) {
@@ -143,7 +143,7 @@ const Navbar = () => {
           className="flex items-center group transition-transform duration-300 hover:scale-105"
         >
           <img
-            src="/lovable-uploads/28695496-ca46-4844-9858-2ec2cec6c76a.png"
+            src="/lovable-uploads/69c11995-2fc1-4bdb-a9e1-b01229d45d2e.png"
             alt="Zaploom Logo"
             className="h-12 w-auto mr-3 transition-transform duration-500"
           />
