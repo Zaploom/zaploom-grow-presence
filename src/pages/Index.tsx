@@ -9,7 +9,6 @@ import Packages from "@/components/Packages";
 import Portfolio from "@/components/Portfolio";
 import Features from "@/components/Features";
 import Testimonials from "@/components/Testimonials";
-import LeadMagnet from "@/components/LeadMagnet";
 import ContactForm from "@/components/ContactForm";
 import Footer from "@/components/Footer";
 import FAQ from "@/components/FAQ";
@@ -35,7 +34,6 @@ const Index = () => {
       <Portfolio />
       <Testimonials />
       <FAQ />
-      <LeadMagnet />
       <ContactForm />
       <Footer />
       <LiveChat />
