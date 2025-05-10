@@ -140,7 +140,7 @@ const Navbar = () => {
       <div className="container-custom flex items-center justify-between">
         <Link 
           to="/"
-          // className="flex items-center group transition-transform duration-300 hover:scale-105"
+          className="flex items-center group transition-transform duration-300 "
         >
           <img
             src="/lovable-uploads/69c11995-2fc1-4bdb-a9e1-b01229d45d2e.png"
