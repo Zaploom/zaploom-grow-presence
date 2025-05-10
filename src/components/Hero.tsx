@@ -6,7 +6,7 @@ const Hero = () => {
   // Function to handle WhatsApp redirect
   const handleWhatsAppRedirect = () => {
     const message = encodeURIComponent("Hi, I'm interested in starting a project with Zaploom. Can we discuss?");
-    const whatsappURL = `https://wa.me/+917795522277?text=${message}`;
+    const whatsappURL = `https://wa.me/+919199893756?text=${message}`;
     window.open(whatsappURL, '_blank');
   };
 
