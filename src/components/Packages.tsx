@@ -103,7 +103,7 @@ const Packages = () => {
           {packages.map((pkg, index) => (
             <div 
               key={index} 
-              className={h-full transform transition-all duration-500 ${pkg.featured ? 'xl:-translate-y-4 hover:-translate-y-6' : 'hover:-translate-y-2'}}
+              className={`h-full transform transition-all duration-500 ${pkg.featured ? 'xl:-translate-y-4 hover:-translate-y-6' : 'hover:-translate-y-2'}`}
               data-aos={pkg.featured ? 'zoom-in' : 'fade-up'}
               data-aos-delay={index * 100}
             >

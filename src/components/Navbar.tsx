@@ -96,22 +96,12 @@ const Navbar = () => {
   }, []);
 
   const navLinks = [
-<<<<<<< HEAD
-    { name: "Home", href: isHomePage ? "#home" : "/" },
-    { name: "About", href: isHomePage ? "#about" : "/#about" },
-    // { name: "About", href: isHomePage ? "#about" : scrollToSection("about") },
-    { name: "Services", href: isHomePage ? "#services" : "/#services" },
-    { name: "Packages", href: isHomePage ? "#packages" : "/#packages" },
-    { name: "Portfolio", href: isHomePage ? "#portfolio" : "/#portfolio" },
-    { name: "Contact", href: isHomePage ? "#contact" : "/#contact" },
-=======
     { name: "Home", href: "/#home" },
     { name: "About", href: "/#about" },
     { name: "Services", href: "/#services" },
     { name: "Packages", href: "/#packages" },
     { name: "Portfolio", href: "/#portfolio" },
     { name: "Contact", href: "/#contact" },
->>>>>>> 491e5e4241f33cb4e9034c5f78ffbe64d92e2697
   ];
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
