@@ -145,7 +145,7 @@ const Navbar = () => {
           <img
             src="/lovable-uploads/69c11995-2fc1-4bdb-a9e1-b01229d45d2e.png"
             alt="Zaploom Logo"
-            className="h-100px w-auto mr-3 transition-transform duration-500 absolute"
+            className="h-10 w-auto mr-3 transition-transform duration-500 "
           />
           {/* <span className="text-2xl font-heading font-bold text-gray-900 dark:text-white group-hover:text-zaploom dark:group-hover:text-zaploom-light transition-colors duration-300">Zaploom</span> */}
         </Link>
