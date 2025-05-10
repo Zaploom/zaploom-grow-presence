@@ -143,7 +143,7 @@ const Navbar = () => {
           className="flex items-center group transition-transform duration-300 hover:scale-105"
         >
           <img
-            src="/lovable-uploads/ChatGPT Image May 10, 2025, 11_49_54 PM.png"
+            src="public/lovable-uploads/ChatGPT Image May 10, 2025, 11_49_54 PM.png"
             alt="Zaploom Logo"
             className="h-[-webkit-fill-available] w-auto mr-3 transition-transform duration-500 absolute"
           />
