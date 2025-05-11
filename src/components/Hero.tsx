@@ -20,13 +20,13 @@ const Hero = () => {
       
       <div className="container-custom relative z-10">
         <div className="max-w-4xl mx-auto text-center">
-          <div className="flex justify-center mb-8">
+          {/* <div className="flex justify-center mb-8">
             <img 
               src="/lovable-uploads/69c11995-2fc1-4bdb-a9e1-b01229d45d2e.png"
               alt="Zaploom Logo"
               className="h-24 w-auto animate-fade-in"
             />
-          </div>
+          </div> */}
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white mb-8 animate-fade-in tracking-tight leading-tight">
             Grow Your Presence with{" "}
             <span className="text-zaploom dark:text-zaploom-light relative inline-block">
