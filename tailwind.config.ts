@@ -130,6 +130,10 @@ export default {
 				'marquee': {
 					'0%': { transform: 'translateX(0%)' },
 					'100%': { transform: 'translateX(-100%)' },
+				},
+				'pulse': {
+					'0%, 100%': { opacity: '1' },
+					'50%': { opacity: '0.5' },
 				}
 			},
 			animation: {
@@ -139,6 +143,11 @@ export default {
 				'fade-in-right': 'fade-in-right 0.5s ease-out',
 				'float': 'float 3s ease-in-out infinite',
 				'marquee': 'marquee 25s linear infinite',
+				'pulse': 'pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+			},
+			transitionDelay: {
+				'75': '75ms',
+				'150': '150ms',
 			}
 		}
 	},
