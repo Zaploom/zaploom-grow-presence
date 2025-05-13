@@ -1,4 +1,3 @@
-
 import { useState, useEffect, useRef, FormEvent } from "react";
 import { MessageSquare, X, Send, User, Mail, Check, AlertCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -12,7 +11,8 @@ import {
   saveChatHistory, 
   formatTimestamp, 
   sendChatTranscript,
-  parseTextWithLinks
+  parseTextWithLinks,
+  LinkInfo
 } from "@/lib/chatUtils";
 import { useIsMobile } from "@/hooks/use-mobile";
 
@@ -155,6 +155,32 @@ const LiveChat = () => {
     }
   };
 
+  // Helper function to render message content with potential links
+  const renderMessageContent = (text: string, isRichText: boolean | undefined) => {
+    if (!isRichText) return <p className="text-sm">{text}</p>;
+    
+    const linkSegments = parseTextWithLinks(text);
+    return (
+      <p className="text-sm">
+        {linkSegments.map((segment, i) => (
+          segment.type === 'link' ? (
+            <a 
+              key={i}
+              href={segment.url} 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="text-blue-500 hover:underline"
+            >
+              {segment.content}
+            </a>
+          ) : (
+            <span key={i}>{segment.content}</span>
+          )
+        ))}
+      </p>
+    );
+  };
+
   return (
     <div className="fixed bottom-6 right-6 z-40">
       {isOpen ? (
@@ -211,11 +237,7 @@ const LiveChat = () => {
                       : "bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-white rounded-bl-none"
                   )}
                 >
-                  {msg.isRichText ? (
-                    <p className="text-sm">{parseTextWithLinks(msg.text)}</p>
-                  ) : (
-                    <p className="text-sm">{msg.text}</p>
-                  )}
+                  {renderMessageContent(msg.text, msg.isRichText)}
                   <span className={cn(
                     "text-xs mt-1 block",
                     msg.sender === "user" 

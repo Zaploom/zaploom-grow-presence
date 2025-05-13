@@ -98,39 +98,41 @@ export const sendChatTranscript = async (
   }
 };
 
-// Parse text for URLs and convert them to clickable links
-export const parseTextWithLinks = (text: string): React.ReactNode[] => {
+// Instead of returning JSX, we return information about the links in the text
+// that the component can use to render links properly
+export interface LinkInfo {
+  type: 'text' | 'link';
+  content: string;
+  url?: string;
+}
+
+// Parse text for URLs and identify link segments
+export const parseTextWithLinks = (text: string): LinkInfo[] => {
   // URL regex pattern
   const urlRegex = /(https?:\/\/[^\s]+)/g;
   
-  // If no URLs in the text, return it as is
+  // If no URLs in the text, return it as single text segment
   if (!text.match(urlRegex)) {
-    return [text];
+    return [{ type: 'text', content: text }];
   }
   
-  // Split the text by URLs and create an array of text and link elements
+  // Split the text by URLs
   const parts = text.split(urlRegex);
   const matches = text.match(urlRegex) || [];
   
-  const result: React.ReactNode[] = [];
+  const result: LinkInfo[] = [];
   
-  // Interleave text and link elements
+  // Interleave text and link segments
   parts.forEach((part, index) => {
     if (part) {
-      result.push(part);
+      result.push({ type: 'text', content: part });
     }
     if (matches[index]) {
-      result.push(
-        <a 
-          key={index} 
-          href={matches[index]} 
-          target="_blank" 
-          rel="noopener noreferrer" 
-          className="text-blue-500 hover:underline"
-        >
-          {matches[index]}
-        </a>
-      );
+      result.push({ 
+        type: 'link', 
+        content: matches[index],
+        url: matches[index]
+      });
     }
   });
   
