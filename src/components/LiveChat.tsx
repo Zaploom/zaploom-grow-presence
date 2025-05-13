@@ -1,18 +1,32 @@
 
-import { useState, useEffect, useRef } from "react";
-import { MessageSquare, X, Send, User } from "lucide-react";
+import { useState, useEffect, useRef, FormEvent } from "react";
+import { MessageSquare, X, Send, User, Mail, Check, AlertCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
 import { ChatMessage, QuickReply, defaultQuickReplies } from "@/types/chat";
-import { getSavedChatHistory, saveChatHistory, formatTimestamp } from "@/lib/chatUtils";
+import { 
+  getSavedChatHistory, 
+  saveChatHistory, 
+  formatTimestamp, 
+  sendChatTranscript,
+  parseTextWithLinks
+} from "@/lib/chatUtils";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 const LiveChat = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [message, setMessage] = useState("");
   const [chatHistory, setChatHistory] = useState<ChatMessage[]>([]);
   const [isTyping, setIsTyping] = useState(false);
+  const [isEmailFormOpen, setIsEmailFormOpen] = useState(false);
+  const [email, setEmail] = useState("");
+  const [isSendingEmail, setIsSendingEmail] = useState(false);
+  const [emailStatus, setEmailStatus] = useState<"idle" | "success" | "error">("idle");
   const messageEndRef = useRef<HTMLDivElement>(null);
+  const isMobile = useIsMobile();
   
   // Initialize chat history from localStorage, or use default message
   useEffect(() => {
@@ -26,7 +40,8 @@ const LiveChat = () => {
       const initialMessage: ChatMessage = {
         sender: "bot",
         text: "Hi there! How can I help you with your web development project today?",
-        timestamp: new Date()
+        timestamp: new Date(),
+        isRichText: false
       };
       setChatHistory([initialMessage]);
       saveChatHistory([initialMessage]);
@@ -43,10 +58,15 @@ const LiveChat = () => {
   // Scroll to the bottom of the chat when new messages are added
   useEffect(() => {
     messageEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [chatHistory]);
+  }, [chatHistory, isEmailFormOpen]);
 
   const toggleChat = () => {
     setIsOpen(!isOpen);
+    // Reset email form when closing chat
+    if (!isOpen === false) {
+      setIsEmailFormOpen(false);
+      setEmailStatus("idle");
+    }
   };
 
   const sendMessage = (text: string) => {
@@ -55,7 +75,8 @@ const LiveChat = () => {
       const userMessage: ChatMessage = {
         sender: "user",
         text: text.trim(),
-        timestamp: new Date()
+        timestamp: new Date(),
+        isRichText: false
       };
       
       setChatHistory(prev => [...prev, userMessage]);
@@ -68,10 +89,25 @@ const LiveChat = () => {
       setTimeout(() => {
         setIsTyping(false);
         
+        // Check for keywords to provide rich text responses
+        let botResponse: string;
+        let isRich = false;
+        
+        if (text.toLowerCase().includes("portfolio") || text.toLowerCase().includes("examples")) {
+          botResponse = "You can check out our portfolio at https://zaploom.com/portfolio. We've worked with clients across various industries.";
+          isRich = true;
+        } else if (text.toLowerCase().includes("pricing") || text.toLowerCase().includes("cost")) {
+          botResponse = "Our pricing starts at $1,500 for basic websites. For more details, visit https://zaploom.com/pricing.";
+          isRich = true;
+        } else {
+          botResponse = "Thanks for your message! One of our team members will get back to you shortly. In the meantime, feel free to check out our services or portfolio.";
+        }
+        
         const botMessage: ChatMessage = {
           sender: "bot",
-          text: "Thanks for your message! One of our team members will get back to you shortly. In the meantime, feel free to check out our services or portfolio.",
-          timestamp: new Date()
+          text: botResponse,
+          timestamp: new Date(),
+          isRichText: isRich
         };
         
         setChatHistory(prev => [...prev, botMessage]);
@@ -79,7 +115,7 @@ const LiveChat = () => {
     }
   };
   
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     sendMessage(message);
   };
@@ -88,28 +124,73 @@ const LiveChat = () => {
     sendMessage(quickReply.message);
   };
 
+  const handleSendTranscript = async (e: FormEvent) => {
+    e.preventDefault();
+    if (!email || !email.includes('@')) return;
+    
+    setIsSendingEmail(true);
+    setEmailStatus("idle");
+    
+    try {
+      const success = await sendChatTranscript(email, chatHistory);
+      setEmailStatus(success ? "success" : "error");
+      
+      if (success) {
+        // Add system message about successful email
+        const systemMessage: ChatMessage = {
+          sender: "bot",
+          text: `Chat transcript sent to ${email}`,
+          timestamp: new Date(),
+          isRichText: false
+        };
+        setChatHistory(prev => [...prev, systemMessage]);
+        setEmail("");
+        setIsEmailFormOpen(false);
+      }
+    } catch (error) {
+      console.error("Failed to send email:", error);
+      setEmailStatus("error");
+    } finally {
+      setIsSendingEmail(false);
+    }
+  };
+
   return (
     <div className="fixed bottom-6 right-6 z-40">
       {isOpen ? (
         <div 
-          className="bg-white dark:bg-gray-800 rounded-lg shadow-xl w-80 md:w-96 overflow-hidden animate-fade-in" 
-          style={{ height: "500px", maxHeight: "80vh" }}
+          className="bg-white dark:bg-gray-800 rounded-lg shadow-xl overflow-hidden animate-fade-in flex flex-col" 
+          style={{ 
+            width: isMobile ? "calc(100vw - 32px)" : "380px", 
+            height: isMobile ? "calc(90vh - 32px)" : "500px",
+            maxHeight: "80vh" 
+          }}
         >
           <div className="bg-zaploom text-white p-4 flex justify-between items-center">
             <div className="flex items-center">
               <MessageSquare className="h-5 w-5 mr-2" />
               <h3 className="font-medium">Chat with Zaploom</h3>
             </div>
-            <button 
-              onClick={toggleChat} 
-              className="text-white hover:text-gray-200 transition-colors"
-              aria-label="Close chat"
-            >
-              <X className="h-5 w-5" />
-            </button>
+            <div className="flex items-center space-x-2">
+              <button 
+                onClick={() => setIsEmailFormOpen(prev => !prev)} 
+                className="text-white hover:text-gray-200 transition-colors p-1 rounded-full hover:bg-white/10"
+                aria-label="Email transcript"
+                title="Email transcript"
+              >
+                <Mail className="h-4 w-4" />
+              </button>
+              <button 
+                onClick={toggleChat} 
+                className="text-white hover:text-gray-200 transition-colors p-1 rounded-full hover:bg-white/10"
+                aria-label="Close chat"
+              >
+                <X className="h-5 w-5" />
+              </button>
+            </div>
           </div>
           
-          <div className="p-4 h-[350px] overflow-y-auto flex flex-col gap-3">
+          <div className="flex-1 overflow-y-auto flex flex-col p-4 gap-3">
             {chatHistory.map((msg, index) => (
               <div
                 key={index}
@@ -130,7 +211,11 @@ const LiveChat = () => {
                       : "bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-white rounded-bl-none"
                   )}
                 >
-                  <p className="text-sm">{msg.text}</p>
+                  {msg.isRichText ? (
+                    <p className="text-sm">{parseTextWithLinks(msg.text)}</p>
+                  ) : (
+                    <p className="text-sm">{msg.text}</p>
+                  )}
                   <span className={cn(
                     "text-xs mt-1 block",
                     msg.sender === "user" 
@@ -164,6 +249,51 @@ const LiveChat = () => {
                     <div className="w-2 h-2 bg-gray-400 dark:bg-gray-500 rounded-full animate-pulse delay-150"></div>
                   </div>
                 </div>
+              </div>
+            )}
+            
+            {isEmailFormOpen && (
+              <div className="bg-gray-50 dark:bg-gray-700 p-3 rounded-lg my-2 animate-fade-in">
+                <h4 className="text-sm font-medium mb-2">Send chat transcript to your email</h4>
+                <form onSubmit={handleSendTranscript} className="flex flex-col gap-2">
+                  <Input
+                    type="email"
+                    placeholder="your@email.com"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                    className="text-sm"
+                  />
+                  {emailStatus === "success" && (
+                    <p className="text-xs text-green-600 dark:text-green-400 flex items-center">
+                      <Check className="h-3 w-3 mr-1" /> Transcript sent successfully
+                    </p>
+                  )}
+                  {emailStatus === "error" && (
+                    <p className="text-xs text-red-600 dark:text-red-400 flex items-center">
+                      <AlertCircle className="h-3 w-3 mr-1" /> Failed to send transcript
+                    </p>
+                  )}
+                  <div className="flex justify-end gap-2">
+                    <Button 
+                      type="button" 
+                      variant="outline" 
+                      size="sm"
+                      onClick={() => setIsEmailFormOpen(false)}
+                      className="text-xs h-8"
+                    >
+                      Cancel
+                    </Button>
+                    <Button 
+                      type="submit" 
+                      size="sm" 
+                      className="bg-zaploom hover:bg-zaploom-light text-white text-xs h-8"
+                      disabled={isSendingEmail || !email || !email.includes('@')}
+                    >
+                      {isSendingEmail ? "Sending..." : "Send"}
+                    </Button>
+                  </div>
+                </form>
               </div>
             )}
             

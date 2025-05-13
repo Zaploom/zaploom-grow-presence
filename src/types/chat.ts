@@ -3,6 +3,7 @@ export interface ChatMessage {
   sender: 'user' | 'bot';
   text: string;
   timestamp: Date;
+  isRichText?: boolean; // Flag for whether the content contains rich formatting
 }
 
 export interface QuickReply {
