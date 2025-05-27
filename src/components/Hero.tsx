@@ -21,7 +21,7 @@ const Hero = () => {
         <div className="absolute bottom-32 right-[5%] w-72 h-72 lg:w-[28rem] lg:h-[28rem] bg-zaploom/5 dark:bg-zaploom-light/5 rounded-full blur-3xl"></div>
       </div>
 
-      <div className="container-custom relative z-10">
+      <div className="container-custom relative z-10 pt-4">
         <div className="max-w-4xl mx-auto text-center">
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white mb-8 animate-fade-in tracking-tight leading-tight">
             Grow Your Presence with{" "}
