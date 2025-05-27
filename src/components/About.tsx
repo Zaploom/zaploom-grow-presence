@@ -6,12 +6,13 @@ import { Link } from "react-router-dom";
 const About = () => {
   return (
     <section id="about" className="pt-0 py-20 lg:py-24 bg-white">
-      <div className="container-custom">
+      <div className="container">
         <div className="grid md:grid-cols-2 gap-12 lg:gap-16 items-center">
-          <div className="order-2 md:order-1">
+          <div className="order-2 md:order-1 animate-fade-in">
             <div className="max-w-lg">
               <h2 className="text-3xl md:text-4xl font-bold mb-6 text-gray-900 tracking-tight">
-                About <span className="text-zaploom relative inline-block">
+                About{" "}
+                <span className="text-zaploom relative inline-block">
                   Zaploom
                   <span className="absolute -bottom-1 left-0 w-full h-1 bg-zaploom/20 rounded-full"></span>
                 </span>
@@ -30,7 +31,7 @@ const About = () => {
               </Link>
             </div>
           </div>
-          <div className="order-1 md:order-2">
+          <div className="order-1 md:order-2 animate-fade-in">
             <div className="relative">
               <div className="absolute -left-6 -top-6 w-48 h-48 bg-zaploom/5 rounded-full blur-xl"></div>
               <div className="aspect-video bg-gray-100 rounded-xl overflow-hidden shadow-lg relative z-10 transition-all duration-300 hover:shadow-xl hover:scale-[1.02]">
@@ -40,7 +41,7 @@ const About = () => {
                   className="w-full h-full object-cover"
                 />
               </div>
-              <div className="absolute -bottom-6 -left-6 w-32 h-32 bg-zaploom rounded-lg shadow-lg flex items-center justify-center text-white p-4 z-20">
+              <div className="absolute -bottom-6 -left-6 w-32 h-32 bg-zaploom rounded-lg shadow-lg flex items-center justify-center text-white p-4 z-20 animate-float">
                 <div className="text-center">
                   <p className="text-2xl font-bold">2+</p>
                   <p className="text-sm">Years Experience</p>
