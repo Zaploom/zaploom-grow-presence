@@ -57,7 +57,7 @@ const Hero = () => {
           </div>
 
           <div className="mt-12 flex items-center justify-center gap-2">
-            <span className="block h-2 w-2 rounded-full bg-zaploom dark:bg-zaploom-light animate-pulse"></span>
+           <span className="block h-2 w-2 rounded-full bg-zaploom dark:bg-zaploom-light animate-bounce"></span>
             <span className="text-sm text-gray-500 dark:text-gray-400">Scroll to explore</span>
           </div>
         </div>
