@@ -1,75 +1,45 @@
 
-// components/Hero.tsx
-
-"use client";
-
 import { Button } from "@/components/ui/button";
 import { ArrowRight, MessageSquare } from "lucide-react";
-import { motion } from "framer-motion";
-
-// WhatsApp message redirect
-const handleWhatsAppRedirect = () => {
-  const message = encodeURIComponent("Hi, I'm interested in starting a project with Zaploom. Can we discuss?");
-  const whatsappURL = `https://wa.me/+919199893756?text=${message}`;
-  window.open(whatsappURL, "_blank");
-};
-
-// Framer Motion variants
-const fadeInUp = {
-  hidden: { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0 },
-};
-
-const stagger = {
-  visible: {
-    transition: {
-      staggerChildren: 0.2,
-    },
-  },
-};
 
 const Hero = () => {
+  // Function to handle WhatsApp redirect
+  const handleWhatsAppRedirect = () => {
+    const message = encodeURIComponent("Hi, I'm interested in starting a project with Zaploom. Can we discuss?");
+    const whatsappURL = `https://wa.me/+919199893756?text=${message}`;
+    window.open(whatsappURL, '_blank');
+  };
+
   return (
     <section
       id="home"
-      className="relative py-28 md:py-36 bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-950 overflow-hidden"
+      className="relative min-h-screen py-28 md:py-36 bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-950 overflow-hidden"
     >
-      {/* Background shapes */}
+      {/* Abstract background shapes */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-24 left-[10%] w-64 h-64 lg:w-96 lg:h-96 bg-zaploom/5 dark:bg-zaploom-light/5 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-32 right-[5%] w-72 h-72 lg:w-[28rem] lg:h-[28rem] bg-zaploom/5 dark:bg-zaploom-light/5 rounded-full blur-3xl animate-float-slow"></div>
+        <div className="absolute top-24 left-[10%] w-64 h-64 lg:w-96 lg:h-96 bg-zaploom/5 dark:bg-zaploom-light/5 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-32 right-[5%] w-72 h-72 lg:w-[28rem] lg:h-[28rem] bg-zaploom/5 dark:bg-zaploom-light/5 rounded-full blur-3xl"></div>
       </div>
 
       <div className="container-custom relative z-10">
-        <motion.div
-          className="max-w-4xl mx-auto text-center"
-          initial="hidden"
-          animate="visible"
-          variants={stagger}
-        >
-          {/* Heading */}
-          <motion.h1
-            className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white mb-8 tracking-tight leading-tight"
-            variants={fadeInUp}
-          >
+        <div className="max-w-4xl mx-auto text-center">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white mb-8 animate-fade-in tracking-tight leading-tight">
             Grow Your Presence with{" "}
             <span className="text-zaploom dark:text-zaploom-light relative inline-block">
               Zaploom
               <span className="absolute -bottom-2 left-0 w-full h-2 bg-zaploom/20 dark:bg-zaploom-light/20 rounded-full"></span>
             </span>
-          </motion.h1>
+          </h1>
 
-          {/* Subtext */}
-          <motion.p
-            className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 mb-10 max-w-3xl mx-auto"
-            variants={fadeInUp}
-          >
-            Modern websites and web apps built to grow your brand, business, or idea — beautifully and efficiently.
-          </motion.p>
+          <div className="flex relative mb-10 justify-center">
+            <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 animate-fade-in max-w-3xl">
+              Modern websites and web apps built to grow your brand, business, or idea — 
+              beautifully and efficiently.
+            </p>
+          </div>
 
-          {/* Buttons */}
-          <motion.div className="flex flex-col sm:flex-row justify-center gap-6" variants={fadeInUp}>
-            <Button
+          <div className="flex flex-col sm:flex-row justify-center gap-6 animate-fade-in">
+            <Button 
               className="btn-primary text-lg group transition-all duration-300 hover:scale-105 flex items-center gap-2"
               onClick={handleWhatsAppRedirect}
             >
@@ -77,25 +47,23 @@ const Hero = () => {
               Discuss Your Project
               <ArrowRight className="ml-1 h-5 w-5 group-hover:translate-x-1 transition-transform" />
             </Button>
-            <Button
-              variant="outline"
+            <Button 
+              variant="outline" 
               className="text-lg border-zaploom dark:border-zaploom-light text-zaploom dark:text-zaploom-light hover:bg-zaploom/10 dark:hover:bg-zaploom-light/10 transition-all duration-300"
-              onClick={() => document.getElementById("portfolio")?.scrollIntoView()}
+              onClick={() => document.getElementById('portfolio')?.scrollIntoView()}
             >
               View Our Work
             </Button>
-          </motion.div>
+          </div>
 
-          {/* Scroll dot */}
-          <motion.div className="mt-12 flex items-center justify-center gap-2" variants={fadeInUp}>
-            <span className="block h-2 w-2 rounded-full bg-zaploom dark:bg-zaploom-light animate-bounce"></span>
+          <div className="mt-12 flex items-center justify-center gap-2">
+           <span className="block h-2 w-2 rounded-full bg-zaploom dark:bg-zaploom-light animate-bounce"></span>
             <span className="text-sm text-gray-500 dark:text-gray-400">Scroll to explore</span>
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
       </div>
 
-      {/* Wave SVG */}
-      <div className="absolute bottom-0 left-0 w-full overflow-hidden">
+      <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-none">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 1200 120"
