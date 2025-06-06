@@ -1,8 +1,7 @@
-
 import { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Image, X, ExternalLink } from "lucide-react";
+import { Image, X } from "lucide-react";
 
 interface Project {
   id: string;
@@ -169,11 +168,7 @@ const Portfolio = () => {
                   )}
                 </div>
                 <p className="text-gray-600 dark:text-gray-300 mb-8 leading-relaxed">{activeProject.description}</p>
-                <div className="flex flex-wrap gap-4">
-                  <Button className="bg-zaploom hover:bg-zaploom/90 text-white flex items-center gap-2 transition-transform duration-300 hover:scale-105">
-                    View Live Site
-                    <ExternalLink className="h-4 w-4" />
-                  </Button>
+                <div className="flex justify-center">
                   <Button 
                     variant="outline" 
                     className="border-zaploom text-zaploom dark:border-zaploom-light dark:text-zaploom-light hover:bg-zaploom/10 dark:hover:bg-zaploom/20 transition-colors duration-200" 
