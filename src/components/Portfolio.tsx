@@ -1,5 +1,4 @@
-
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -41,6 +40,51 @@ const Portfolio = () => {
   const [activeProject, setActiveProject] = useState<Project | null>(null);
   const [activeFilter, setActiveFilter] = useState("all");
   const [currentProjectIndex, setCurrentProjectIndex] = useState(0);
+
+  // Handle modal open/close effects
+  useEffect(() => {
+    if (activeProject) {
+      // Disable background scroll
+      document.body.style.overflow = 'hidden';
+      
+      // Hide navbar by adding a class to body
+      document.body.classList.add('modal-open');
+      
+      // Add custom CSS for hiding navbar
+      const style = document.createElement('style');
+      style.id = 'portfolio-modal-styles';
+      style.textContent = `
+        .modal-open nav {
+          opacity: 0;
+          pointer-events: none;
+          transition: opacity 0.3s ease;
+        }
+      `;
+      document.head.appendChild(style);
+    } else {
+      // Re-enable background scroll
+      document.body.style.overflow = 'unset';
+      
+      // Show navbar
+      document.body.classList.remove('modal-open');
+      
+      // Remove custom styles
+      const style = document.getElementById('portfolio-modal-styles');
+      if (style) {
+        style.remove();
+      }
+    }
+
+    // Cleanup on unmount
+    return () => {
+      document.body.style.overflow = 'unset';
+      document.body.classList.remove('modal-open');
+      const style = document.getElementById('portfolio-modal-styles');
+      if (style) {
+        style.remove();
+      }
+    };
+  }, [activeProject]);
 
   const categories = [
     { id: "all", name: "All Projects" },
@@ -249,6 +293,10 @@ const Portfolio = () => {
     setCurrentProjectIndex(index);
   };
 
+  const closeProject = () => {
+    setActiveProject(null);
+  };
+
   const navigateProject = (direction: 'prev' | 'next') => {
     const newIndex = direction === 'prev' 
       ? (currentProjectIndex - 1 + projects.length) % projects.length
@@ -260,7 +308,7 @@ const Portfolio = () => {
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'Escape') {
-      setActiveProject(null);
+      closeProject();
     } else if (e.key === 'ArrowLeft') {
       navigateProject('prev');
     } else if (e.key === 'ArrowRight') {
@@ -369,11 +417,18 @@ const Portfolio = () => {
 
         {activeProject && (
           <div 
-            className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 p-4"
+            className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-[60] p-4"
             onKeyDown={handleKeyDown}
             tabIndex={-1}
           >
-            <div className="bg-white dark:bg-gray-800 rounded-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto relative animate-fade-in">
+            {/* Welcome message */}
+            <div className="absolute top-8 left-1/2 transform -translate-x-1/2 bg-zaploom text-white px-6 py-3 rounded-full shadow-lg animate-fade-in z-10">
+              <p className="text-sm font-medium">
+                ✨ Dive deep without distractions! Background scroll is paused and the navbar is hidden so you can fully enjoy the portfolio details. Close anytime to get back to browsing!
+              </p>
+            </div>
+
+            <div className="bg-white dark:bg-gray-800 rounded-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto relative animate-fade-in mt-16">
               {/* Navigation buttons */}
               <Button 
                 variant="ghost" 
@@ -397,7 +452,7 @@ const Portfolio = () => {
                 variant="ghost" 
                 size="icon" 
                 className="absolute top-4 right-4 z-10 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full"
-                onClick={() => setActiveProject(null)}
+                onClick={closeProject}
               >
                 <X className="h-5 w-5 text-gray-600 dark:text-gray-300" />
               </Button>
